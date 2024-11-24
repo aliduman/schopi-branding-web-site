@@ -1,107 +1,115 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "./globals.css";
-import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
-import { fetchAPI } from "./utils/fetch-api";
 
-import { i18n } from "../../../i18n-config";
+import {i18n} from "../../../i18n-config";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
 
 
 async function getGlobal(lang: string): Promise<any> {
-  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-
-  if (!token) throw new Error("The Strapi API Token environment variable is not set.");
-
-  const path = `/global`;
-  const options = { headers: { Authorization: `Bearer ${token}` } };
-
-  const urlParamsObject = {
-    populate: [
-      "metadata.shareImage",
-      "favicon",
-      "notificationBanner.link",
-      "navbar.links",
-      "navbar.navbarLogo.logoImg",
-      "footer.footerLogo.logoImg",
-      "footer.menuLinks",
-      "footer.legalLinks",
-      "footer.socialLinks",
-      "footer.categories",
-    ],
-    locale: lang,
-  };
-  return await fetchAPI(path, urlParamsObject, options);
 }
 
-export async function generateMetadata({ params } : { params: {lang: string}}): Promise<Metadata> {
-  const meta = await getGlobal(params.lang);
-
-  if (!meta.data) return FALLBACK_SEO;
-
-  const { metadata, favicon } = meta.data.attributes;
-  const { url } = favicon.data.attributes;
-
-  return {
-    title: metadata.metaTitle,
-    description: metadata.metaDescription,
-    icons: {
-      icon: [new URL(url, getStrapiURL())],
-    },
-  };
+export async function generateMetadata({params}: { params: { lang: string } }): Promise<Metadata> {
+    return {
+        title: "metadata.metaTitle",
+        description: "metadata.metaDescription",
+        icons: {},
+    };
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  readonly children: React.ReactNode;
-  readonly params: { lang: string };
+export default async function RootLayout({children, params,}: {
+    readonly children: React.ReactNode;
+    readonly params: { lang: string };
 }) {
-  const global = await getGlobal(params.lang);
-  // TODO: CREATE A CUSTOM ERROR PAGE
-  if (!global.data) return null;
-  
-  const { notificationBanner, navbar, footer } = global.data.attributes;
+    const navbar = {
+        links: [
+            {id: 1, title: "Home", url: "/", newTab: false, text: "Home"},
+            {id: 2, title: "About", url: "/about", newTab: false, text: "About"},
+            {id: 3, title: "Contact", url: "/contact", newTab: false, text: "Contact"},
+        ],
+        navbarLogo: {
+            logoText: "My Logo"
+        }
+    };
 
-  const navbarLogoUrl = getStrapiMedia(
-    navbar.navbarLogo.logoImg.data?.attributes.url
-  );
+    const navbarLogoUrl = "";
+    const footerLogoUrl = "";
+    const notificationBanner = {
+        heading: "Latest News",
+        text: "Check out our latest updates",
+        type: "info",
+        show: true,
+        link: {
+            id: 1,
+            url: "/blog",
+            newTab: false,
+            text: "Read the latest blog post",
+        },
+    };
 
-  const footerLogoUrl = getStrapiMedia(
-    footer.footerLogo.logoImg.data?.attributes.url
-  );
+    interface CategoryLink {
+        id: string;
+        attributes: {
+            name: string;
+            slug: string;
+        };
+    }
+    const footer = {
+        footerLogo: {
+            logoText: "My Logo"
+        },
+        menuLinks: [
+            {id: 1, title: "Home", url: "/", newTab: false, text: "Home"},
+            {id: 2, title: "About", url: "/about", newTab: false, text: "About"},
+            {id: 3, title: "Contact", url: "/contact", newTab: false, text: "Contact"},
+        ],
+        legalLinks: [
+            {id: 1, title: "Privacy Policy", url: "/privacy-policy", newTab: false, text: "Privacy Policy"},
+            {id: 2, title: "Terms of Service", url: "/terms-of-service", newTab: false, text: "Terms of Service"},
+        ],
+        socialLinks: [
+            {id: 1, title: "Facebook", url: "https://facebook.com", newTab: true, text: "Facebook"},
+            {id: 2, title: "Twitter", url: "https://twitter.com", newTab: true, text: "Twitter"},
+            {id: 3, title: "Instagram", url: "https://instagram.com", newTab: true, text: "Instagram"},
+        ],
+        categories: {
+            data: [
+                {id: "1", attributes: {name: "Category 1", slug: "category-1"}},
+                {id: "2", attributes: {name: "Category 2", slug: "category-2"}},
+                {id: "3", attributes: {name: "Category 3", slug: "category-3"}}
+            ],
+        },
+    };
 
-  return (
-    <html lang={params.lang}>
-      <body>
+
+    return (
+        <html lang={params.lang}>
+        <body>
         <Navbar
-          links={navbar.links}
-          logoUrl={navbarLogoUrl}
-          logoText={navbar.navbarLogo.logoText}
-        />
+            links={navbar.links}
+            logoUrl={navbarLogoUrl}
+            logoText={navbar.navbarLogo.logoText}></Navbar>
 
         <main className="dark:bg-black dark:text-gray-100 min-h-screen">
-          {children}
+            {children}
         </main>
 
-        <Banner data={notificationBanner} />
+        <Banner data={notificationBanner}/>
 
         <Footer
-          logoUrl={footerLogoUrl}
-          logoText={footer.footerLogo.logoText}
-          menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
-          legalLinks={footer.legalLinks}
-          socialLinks={footer.socialLinks}
+            logoUrl={footerLogoUrl}
+            logoText={footer.footerLogo.logoText}
+            menuLinks={footer.menuLinks}
+            categoryLinks={footer.categories.data}
+            legalLinks={footer.legalLinks}
+            socialLinks={footer.socialLinks}
         />
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }
 
 export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
+    return i18n.locales.map((locale) => ({lang: locale}));
 }
