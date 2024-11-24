@@ -53,6 +53,39 @@ function Feature({ title, description, showLink, newTab, url, text }: Feature) {
 }
 
 export default function Features({ data }: FeaturesProps) {
+    data = {
+        heading: "Features",
+        description: "Check out our list of awesome features",
+        feature: [
+            {
+                id: "1",
+                title: "Feature 1",
+                description: "This is a description for feature 1",
+                showLink: true,
+                newTab: false,
+                url: "/",
+                text: "Learn More",
+            },
+            {
+                id: "2",
+                title: "Feature 2",
+                description: "This is a description for feature 2",
+                showLink: true,
+                newTab: false,
+                url: "/",
+                text: "Learn More",
+            },
+            {
+                id: "3",
+                title: "Feature 3",
+                description: "This is a description for feature 3",
+                showLink: true,
+                newTab: false,
+                url: "/",
+                text: "Learn More",
+            },
+        ]
+    }
   return (
     <section className="dark:bg-black dark:text-gray-100 m:py-12 lg:py-24">
       <div className="container mx-auto py-4 space-y-2 text-center">

@@ -1,23 +1,49 @@
 import LangRedirect from './components/LangRedirect';
 import componentResolver from './utils/component-resolver';
-import {getPageBySlug} from "@/app/[lang]/utils/get-page-by-slug";
-
 
 export default async function RootRoute({params}: { params: { lang: string } }) {
     try {
-      const page = await getPageBySlug('home', params.lang)
-      if (page.error && page.error.status == 401)
-        throw new Error(
-          'Missing or invalid credentials. Have you created an access token using the Strapi admin panel? http://localhost:1337/admin/'
+        const contentSections = [
+            {
+                __component: 'sections.hero',
+                title: 'Welcome to the Next.js Starter',
+                description: 'This is a starter template for Next.js with Strapi.',
+                image: {
+                    url: '/uploads/hero_image_2x_7a3f0c3b3b.png',
+                },
+            },
+            {
+                __component: 'sections.features',
+                title: 'Features',
+                features: [
+                    {
+                        title: 'Create a Strapi project',
+                        description: 'Create a Strapi project using this starter template.',
+                        image: {
+                            url: '/uploads/feature_1_2x_5b0a1b6b1b.png',
+                        },
+                    },
+                    {
+                        title: 'Create a Next.js project',
+                        description: 'Create a Next.js project using this starter template.',
+                        image: {
+                            url: '/uploads/feature_2_2x_6c9d2b9a4b.png',
+                        },
+                    },
+                    {
+                        title: 'Deploy',
+                        description: 'Deploy on Vercel.',
+                        image: {
+                            url: '/uploads/feature_3_2x_7e9f2b9a4b.png',
+                        },
+                    },
+                ]
+            },
+        ];
+        return contentSections.map((section: any, index: number) =>
+            componentResolver(section, index)
         )
-
-      if (page.data.length == 0 && params.lang !== 'en') return <LangRedirect />
-      if (page.data.length === 0) return null
-      const contentSections = page.data[0].attributes.contentSections
-      return contentSections.map((section: any, index: number) =>
-        componentResolver(section, index)
-      )
     } catch (error: any) {
-      window.alert('Missing or invalid credentials')
+        window.alert('Missing or invalid credentials')
     }
 }
