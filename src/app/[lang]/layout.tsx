@@ -6,10 +6,6 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
-
-async function getGlobal(lang: string): Promise<any> {
-}
-
 export async function generateMetadata({params}: { params: { lang: string } }): Promise<Metadata> {
     return {
         title: "metadata.metaTitle",
@@ -72,14 +68,7 @@ export default async function RootLayout({children, params,}: {
             {id: 1, title: "Facebook", url: "https://facebook.com", newTab: true, text: "Facebook"},
             {id: 2, title: "Twitter", url: "https://twitter.com", newTab: true, text: "Twitter"},
             {id: 3, title: "Instagram", url: "https://instagram.com", newTab: true, text: "Instagram"},
-        ],
-        categories: {
-            data: [
-                {id: "1", attributes: {name: "Category 1", slug: "category-1"}},
-                {id: "2", attributes: {name: "Category 2", slug: "category-2"}},
-                {id: "3", attributes: {name: "Category 3", slug: "category-3"}}
-            ],
-        },
+        ]
     };
 
 
@@ -101,7 +90,6 @@ export default async function RootLayout({children, params,}: {
             logoUrl={footerLogoUrl}
             logoText={footer.footerLogo.logoText}
             menuLinks={footer.menuLinks}
-            categoryLinks={footer.categories.data}
             legalLinks={footer.legalLinks}
             socialLinks={footer.socialLinks}
         />
