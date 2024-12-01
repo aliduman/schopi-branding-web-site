@@ -1,47 +1,57 @@
-import LangRedirect from './components/LangRedirect';
-import componentResolver from './utils/component-resolver';
+import Container from "./components/Container";
+import Hero from "./components/Hero";
+import { SectionTitle } from "./components/SectionTitle";
+import Benefits from "./components/Benefits";
+import { Video } from "./components/Video";
+import { Testimonials } from "./components/Testimonials";
+import { Cta } from "./components/Cta";
+import { benefitOne, benefitTwo } from "./components/data";
+import { Faq } from "./components/Faq";
 
 export default async function RootRoute({params}: { params: { lang: string } }) {
     try {
-        const contentSections = [
-            {
-                __component: 'sections.hero',
-                title: 'Welcome to the Next.js Starter',
-                description: 'This is a starter template for Next.js with Strapi.',
-                image: {
-                    url: '/uploads/hero_image_2x_7a3f0c3b3b.png',
-                },
-            },
-            {
-                __component: 'sections.features',
-                title: 'Features',
-                features: [
-                    {
-                        title: 'Create a Strapi project',
-                        description: 'Create a Strapi project using this starter template.',
-                        image: {
-                            url: '/uploads/feature_1_2x_5b0a1b6b1b.png',
-                        },
-                    },
-                    {
-                        title: 'Create a Next.js project',
-                        description: 'Create a Next.js project using this starter template.',
-                        image: {
-                            url: '/uploads/feature_2_2x_6c9d2b9a4b.png',
-                        },
-                    },
-                    {
-                        title: 'Deploy',
-                        description: 'Deploy on Vercel.',
-                        image: {
-                            url: '/uploads/feature_3_2x_7e9f2b9a4b.png',
-                        },
-                    },
-                ]
-            },
-        ];
-        return contentSections.map((section: any, index: number) =>
-            componentResolver(section, index)
+        return (
+            <Container>
+                <Hero />
+                <SectionTitle
+                    preTitle="Zaman Kazanın"
+                    title="Alışveriş Yaparken Daha Az Zaman, Daha Fazla Organize Olun "
+                >
+                    Schopi alışveriş yaparken daha fazla zaman kazandıracak ve geriye dönük olarak
+                    daha fazla organize olmanıza yardımcı olacak.
+                </SectionTitle>
+
+                <Benefits data={benefitOne} />
+                <Benefits imgPos="right" data={benefitTwo} />
+
+                <SectionTitle
+                    preTitle="Bir video izleyin"
+                    title="Ürünümüzü daha yakından tanıyın"
+                >
+                    Schopi'yi kullanırken sizi neler beklediğini daha iyi anlamak için bu videoyu
+                    izleyin.
+                </SectionTitle>
+
+                <Video videoId="fZ0D0cnR88E" />
+
+                <SectionTitle
+                    preTitle="Görüşler"
+                    title="İşte müşterilerimizin söyledikleri"
+                >
+                    Müşterilerimizin Schopi'yi kullanırken yaşadıkları deneyimleri ve memnuniyetlerini
+                    okuyun.
+                </SectionTitle>
+
+                <Testimonials />
+
+                <SectionTitle preTitle="FAQ" title="Frequently Asked Questions">
+                    Answer your customers possible questions here, it will increase the
+                    conversion rate as well as support or chat requests.
+                </SectionTitle>
+
+                <Faq />
+                <Cta />
+            </Container>
         )
     } catch (error: any) {
         window.alert('Missing or invalid credentials')
