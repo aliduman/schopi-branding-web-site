@@ -5,7 +5,7 @@ import Container from "../components/Container";
 export default function Pricing(props: Readonly<any>) {
     const {data} = props;
     return (
-        <Container className="pt-16" id={props.id}>
+        <Container className="pt-16" id={props.id} style={{'paddingTop': 175}}>
             <div className="max-w-screen-xl py-10 mx-auto mt-auto">
                 <div className="text-center">
                     <h1 className="my-3 text-3xl font-bold tracking-tight text-gray-800 md:text-5xl dark:text-gray-100">Abonelik</h1>

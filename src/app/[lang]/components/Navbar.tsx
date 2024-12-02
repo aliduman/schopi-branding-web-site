@@ -5,11 +5,11 @@ import Image from "next/image"
 import {Disclosure} from "@headlessui/react";
 
 export default function Navbar() {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     const navigation = [
-        { name: "Ürümüz", href: "#product" },
-        { name: "Özellikler", href: "#features" },
-        { name: "Fiyatlar", href: "#pricing" },
-        { name: "S.S.S", href: "#faq" },
+        { name: "Özellikler", href: baseUrl+"#features" },
+        { name: "Fiyatlar", href: baseUrl+"#pricing" },
+        { name: "S.S.S", href: baseUrl+"#faq" },
     ];
 
     return (

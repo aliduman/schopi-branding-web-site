@@ -21,12 +21,11 @@ export default async function RootRoute({params}: { params: { lang: string } }) 
                 <SectionTitle
                     preTitle={dict.section1.saveTime}
                     title={dict.section1.saveTimeDesc}
-                    id="product"
                 >
                     {dict.section1.saveTimeText}
                 </SectionTitle>
 
-                <Container id="features">
+                <Container id="features" style={{'paddingTop': 150}}>
                     <Benefits data={benefitOne} />
                     {/*<Benefits imgPos="right" data={benefitTwo} />*/}
                 </Container>

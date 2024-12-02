@@ -1,12 +1,16 @@
+"use client";
 import Image from "next/image";
 import Container from "../components/Container";
 import BenefitOne from "public/img/benefit-one.png";
-import Jumbotron from "public/img/jumbotron.png";
-import Jumbotron2x from "public/img/jumbotron@2x.png";
+import Jumbotron from "public/img/jumbotron.svg";
+import JumbotronWhite from "public/img/jumbotron-white.svg";
+import WebAppIcon from "public/img/web-app-32.png";
+import {useTheme} from "next-themes";
 export default function Hero() {
+    const { theme, setTheme } = useTheme();
     return (
         <>
-            <Container className="flex flex-wrap pt-[100px] lg:pt-10">
+            <Container className="flex flex-wrap pt-[175px]" id={'product'}>
                 <div className="flex items-center w-full lg:w-1/2">
                     <div className="max-w-2xl mb-8">
                         <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
@@ -16,14 +20,25 @@ export default function Hero() {
                             Liste oluşturmayı ve paylaşmayı hiç bu kadar kolay hale getiren bir uygulama görmediniz.
                         </p>
 
-                        <div
-                            className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
+                        <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
+                            {/*Download App Store Button*/}
                             <a
-                                href="https://web3templates.com/templates/nextly-landing-page-template-for-startups"
+                                href="/"
                                 target="_blank"
                                 rel="noopener"
-                                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md ">
-                                Ücretsiz İndirin
+                                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md flex items-center">
+                                <AppleLogo/>
+                                <span className={'ml-2'}>App Store'dan İndir</span>
+                            </a>
+
+                            {/*Get Web App Button*/}
+                            <a
+                                href="https://schopiapp.com"
+                                target="_blank"
+                                rel="noopener"
+                                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md flex items-center">
+                                <Image src={WebAppIcon} alt={'Web App Icon'} className={'w-8 h-8'}/>
+                                <span className={'ml-2'}>Web Uygulamasını Kullan</span>
                             </a>
                         </div>
                     </div>
@@ -31,7 +46,7 @@ export default function Hero() {
                 <div className="flex items-center justify-center w-full lg:w-1/2">
                     <div className="">
                         <Image
-                            src={Jumbotron2x}
+                            src={theme === "dark" ? Jumbotron : JumbotronWhite}
                             width="616"
                             height="617"
                             className={"object-cover"}
@@ -180,3 +195,21 @@ function VerizonLogo() {
     );
 }
 
+function AppleLogo() {
+    return (
+        <svg width={20} fill={'#fff'} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs></defs>
+            <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                <g id="Dribbble-Light-Preview" transform="translate(-102.000000, -7439.000000)" fill="#ffffff">
+                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <path
+                            d="M57.5708873,7282.19296 C58.2999598,7281.34797 58.7914012,7280.17098 58.6569121,7279 C57.6062792,7279.04 56.3352055,7279.67099 55.5818643,7280.51498 C54.905374,7281.26397 54.3148354,7282.46095 54.4735932,7283.60894 C55.6455696,7283.69593 56.8418148,7283.03894 57.5708873,7282.19296 M60.1989864,7289.62485 C60.2283111,7292.65181 62.9696641,7293.65879 63,7293.67179 C62.9777537,7293.74279 62.562152,7295.10677 61.5560117,7296.51675 C60.6853718,7297.73474 59.7823735,7298.94772 58.3596204,7298.97372 C56.9621472,7298.99872 56.5121648,7298.17973 54.9134635,7298.17973 C53.3157735,7298.17973 52.8162425,7298.94772 51.4935978,7298.99872 C50.1203933,7299.04772 49.0738052,7297.68074 48.197098,7296.46676 C46.4032359,7293.98379 45.0330649,7289.44985 46.8734421,7286.3899 C47.7875635,7284.87092 49.4206455,7283.90793 51.1942837,7283.88393 C52.5422083,7283.85893 53.8153044,7284.75292 54.6394294,7284.75292 C55.4635543,7284.75292 57.0106846,7283.67793 58.6366882,7283.83593 C59.3172232,7283.86293 61.2283842,7284.09893 62.4549652,7285.8199 C62.355868,7285.8789 60.1747177,7287.09489 60.1989864,7289.62485"
+                            id="apple-[#173]">
+
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    )
+}

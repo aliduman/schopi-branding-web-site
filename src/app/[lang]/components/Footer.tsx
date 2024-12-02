@@ -22,7 +22,24 @@ export default function Footer() {
             href: "#faq",
         },
     ];
-    const legal = ["Terms", "Privacy", "Legal"];
+    const legal = [
+        {
+            name: "Gizlilik",
+            href: "/privacy",
+        },
+        {
+            name: "Kullanım Koşulları",
+            href: "/terms",
+        },
+        {
+            name: "Çerez Politikası",
+            href: "/cookie-policy",
+        },
+        {
+            name: "İletişim",
+            href: "/contact",
+        }
+    ];
     return (
         <div className="relative">
             <Container>
@@ -66,10 +83,10 @@ export default function Footer() {
                             {legal.map((item, index) => (
                                 <Link
                                     key={index}
-                                    href="/"
+                                    href={item.href}
                                     className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
                                 >
-                                    {item}
+                                    {item.name}
                                 </Link>
                             ))}
                         </div>
