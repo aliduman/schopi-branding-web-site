@@ -34,10 +34,6 @@ export default function Footer() {
         {
             name: "Çerez Politikası",
             href: "/cookie-policy",
-        },
-        {
-            name: "İletişim",
-            href: "/contact",
         }
     ];
     return (
