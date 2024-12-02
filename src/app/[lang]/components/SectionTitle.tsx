@@ -6,11 +6,15 @@ interface SectionTitleProps {
   title?: string;
   align?: "left" | "center";
   children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
 }
 
 export const SectionTitle = (props: Readonly<SectionTitleProps>) => {
   return (
     <Container
+        id={props.id}
+        style={props.style}
       className={`flex w-full flex-col mt-4 ${
         props.align === "left" ? "" : "items-center justify-center text-center"
       }`}>

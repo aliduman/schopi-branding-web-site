@@ -35,22 +35,45 @@ export const Faq = () => {
 }
 
 const faqdata = [
-  {
-    question: "Is this template completely free to use?",
-    answer: "Yes, this template is completely free to use.",
-  },
-  {
-    question: "Can I use it in a commercial project?",
-    answer: "Yes, this you can.",
-  },
-  {
-    question: "What is your refund policy? ",
-    answer:
-      "If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked.",
-  },
-  {
-    question: "Do you offer technical support? ",
-    answer:
-      "No, we don't offer technical support for free downloads. Please purchase a support plan to get 6 months of support.",
-  },
+    /*Schopi alışveriş listesi ürünü ile ilgili soru cevap verisi oluştur.*/
+    {
+    question: "Schopi nedir?",
+    answer: "Schopi, ürünlerinizi çevrimiçi olarak satmanıza yardımcı olacak modern bir e-ticaret şablonudur. Tamamen duyarlı ve güzel bir tasarıma sahip olan bu tema, çarpıcı bir çevrimiçi mağaza oluşturman ıza yardımcı olacaktır.",
+    },
+    {
+    question: "Schopi'yi nasıl satın alabilirim?",
+    answer: "Schopi'yi satın almak için, web sitesindeki 'Satın Al' düğmesine tıklayın ve ardından ödemeyi yapın. Ödeme işleminden sonra, satın alma işleminizi doğrulayan bir e-posta alacaksınız ve ardından indirme bağlantısına yönlendirileceksiniz.",
+    },
+    {
+    question: "Schopi'nin fiyatı nedir?",
+    answer: "Schopi'nin fiyatı 29 $ 'dır. Bu fiyat, ücretsiz güncellemeler ve 6 ay boyunca ücretsiz teknik destek içerir.",
+    },
+    {
+    question: "Schopi'nin kurulumu zor mu?",
+    answer: "Hayır, Schopi'nin kurulumu oldukça kolaydır. Talimatları takip ederek, Schopi'yi kısa sürede kurabilir ve çalıştırabilirsiniz.",
+    },
+    {
+    question: "Schopi'nin desteklenen ödeme yöntemleri nelerdir?",
+    answer: "Schopi, PayPal, Visa, MasterCard, American Express ve Discover gibi popüler ödeme yöntemlerini destekler.",
+    },
+    {
+    question: "Schopi'nin iade politikası nedir?",
+    answer: "Eğer üründen memnun kalmazsanız, 90 gün içinde bize e-posta gönderin ve size tamamen geri ödeme yapacağız, soru sormadan.",
+    },
+    {
+    question: "Schopi'nin teknik destek sunuyor musunuz?",
+    answer: "Evet, Schopi'nin teknik destek planlarını satın alarak 6 ay boyunca destek alabilirsiniz.",
+    },
+    {
+    question: "Schopi'nin özelleştirme seçenekleri nelerdir?",
+    answer: "Schopi, özelleştirme seçenekleri sunar ve renk, yazı tipi ve düzen gibi birçok özelliği özelleştirebilirsiniz.",
+    },
+    {
+    question: "Schopi'nin güncellemeleri ücretsiz mi?",
+    answer: "Evet, Schopi'nin güncellemeleri ücretsizdir ve yeni güncellemeler yayınlandığında otomatik olarak bilgilendirilirsiniz.",
+    },
+    {
+    question: "Schopi'nin lisansı ne kadar süreyle geçerlidir?",
+    answer: "Schopi'nin lisansı ömür boyu geçerlidir ve sınırsız web sitesinde kullanabilirsiniz.",
+    }
 ];

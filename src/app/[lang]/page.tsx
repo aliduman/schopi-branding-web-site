@@ -7,22 +7,29 @@ import { Testimonials } from "./components/Testimonials";
 import { Cta } from "./components/Cta";
 import { benefitOne, benefitTwo } from "./components/data";
 import { Faq } from "./components/Faq";
+import { getDictionary } from './dictionaries'
+import Pricing from "@/app/[lang]/components/Pricing";
 
 export default async function RootRoute({params}: { params: { lang: string } }) {
     try {
+        const dict = await getDictionary(params.lang)
         return (
             <Container>
                 <Hero />
+
+                {/*Zaman Kazan */}
                 <SectionTitle
-                    preTitle="Zaman Kazanın"
-                    title="Alışveriş Yaparken Daha Az Zaman, Daha Fazla Organize Olun "
+                    preTitle={dict.section1.saveTime}
+                    title={dict.section1.saveTimeDesc}
+                    id="product"
                 >
-                    Schopi alışveriş yaparken daha fazla zaman kazandıracak ve geriye dönük olarak
-                    daha fazla organize olmanıza yardımcı olacak.
+                    {dict.section1.saveTimeText}
                 </SectionTitle>
 
-                <Benefits data={benefitOne} />
-                <Benefits imgPos="right" data={benefitTwo} />
+                <Container id="features">
+                    <Benefits data={benefitOne} />
+                    {/*<Benefits imgPos="right" data={benefitTwo} />*/}
+                </Container>
 
                 <SectionTitle
                     preTitle="Bir video izleyin"
@@ -44,12 +51,14 @@ export default async function RootRoute({params}: { params: { lang: string } }) 
 
                 <Testimonials />
 
-                <SectionTitle preTitle="FAQ" title="Frequently Asked Questions">
-                    Answer your customers possible questions here, it will increase the
-                    conversion rate as well as support or chat requests.
+                <Pricing id={'pricing'}/>
+
+                <SectionTitle preTitle="S.S.S" title="Sıkça Sorulan Sorular" id={'faq'} style={{'paddingTop': 150}}>
+                    Schopi hakkında merak ettiğiniz soruların yanıtlarını burada bulabilirsiniz.
                 </SectionTitle>
 
                 <Faq />
+
                 <Cta />
             </Container>
         )

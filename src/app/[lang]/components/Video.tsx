@@ -35,12 +35,17 @@ export function Video({ videoId }: Readonly<VideoProps>) {
           </button>
         )}
         {playVideo && (
-          <iframe
+          /*<iframe
             src={`https://www.youtube-nocookie.com/embed/${videoId}?controls=0&autoplay=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             className="w-full h-full aspect-video"
-          ></iframe>
+          ></iframe>*/
+
+            /*Coming Soon Template*/
+            <div className="flex items-center justify-center w-full h-full text-white">
+              <h2 className="text-3xl font-bold">Coming Soon</h2>
+            </div>
         )}
       </div>
     </Container>
