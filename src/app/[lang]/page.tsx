@@ -14,7 +14,7 @@ export default async function RootRoute({params}: { params: { lang: string } }) 
     try {
         const dict = await getDictionary(params.lang)
         return (
-            <Container>
+            <div>
                 <Hero />
 
                 {/*Zaman Kazan */}
@@ -60,7 +60,7 @@ export default async function RootRoute({params}: { params: { lang: string } }) 
                 <Faq />
 
                 <Cta />
-            </Container>
+            </div>
         )
     } catch (error: any) {
         window.alert('Missing or invalid credentials')
