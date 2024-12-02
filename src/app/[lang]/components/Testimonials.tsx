@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import Container from "../components/Container";
-import user1 from "public/img/user1.jpg";
+import userAyseDemir from "public/img/testimonal-users/ayse-demir.png";
+import userMehmetYilmaz from "public/img/testimonal-users/mehmet-yilmaz.png";
+import userZeynepKaya from "public/img/testimonal-users/zeynep-kaya.png";
 export const Testimonials = () => {
   return (
     <Container>
@@ -13,9 +15,9 @@ export const Testimonials = () => {
             </p>
 
             <Avatar
-              image={user1}
+              image={userAyseDemir}
               name="Ayşe Demir"
-              title="E-Ticaret Uzmanı, Trendyol"
+              title="E-Ticaret Uzmanı"
             />
           </div>
         </div>
@@ -26,9 +28,9 @@ export const Testimonials = () => {
             </p>
 
             <Avatar
-              image={user1}
+              image={userMehmetYilmaz}
               name="Mehmet Yılmaz"
-              title="Ürün Müdürü, Getir"
+              title="Ürün Müdürü"
             />
           </div>
         </div>
@@ -39,7 +41,7 @@ export const Testimonials = () => {
             </p>
 
             <Avatar
-              image={user1}
+              image={userZeynepKaya}
               name="Zeynep Kaya"
               title="Ev Hanımı"
             />
