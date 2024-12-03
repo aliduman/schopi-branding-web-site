@@ -26,7 +26,7 @@ export default function Hero() {
                                 href="/"
                                 target="_blank"
                                 rel="noopener"
-                                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md flex items-center">
+                                className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
                                 <AppleLogo/>
                                 <span className={'ml-2'}>App Store'dan İndir</span>
                             </a>
@@ -36,7 +36,7 @@ export default function Hero() {
                                 href="https://schopiapp.com"
                                 target="_blank"
                                 rel="noopener"
-                                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md flex items-center">
+                                className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
                                 <Image src={WebAppIcon} alt={'Web App Icon'} className={'w-8 h-8'}/>
                                 <span className={'ml-2'}>Web Uygulamasını Kullan</span>
                             </a>
@@ -61,7 +61,7 @@ export default function Hero() {
             {/*<Container>
                 <div className="flex flex-col justify-center">
                     <div className="text-xl text-center text-gray-700 dark:text-white">
-                        Trusted by <span className="text-indigo-600">2000+</span>{" "}
+                        Trusted by <span className="text-schopiColor-primary">2000+</span>{" "}
                         customers worldwide
                     </div>
 

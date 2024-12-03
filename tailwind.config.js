@@ -15,6 +15,9 @@ const config: Config = {
 		extend: {
 			colors: {
 				trueGray: colors.neutral,
+				schopiColor: {
+					primary: "#F84B18"
+				}
 			},
 		},
 		fontFamily: {
