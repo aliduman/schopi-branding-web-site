@@ -29,9 +29,11 @@ export default function Navbar() {
                 <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
                     <ThemeChanger/>
                     <div className="hidden mr-3 lg:flex nav__item">
-                        <Link href="/" className="px-6 py-2 text-white bg-schopiColor-primary rounded-md md:ml-5 flex">
-                            <span className={"mr-2"}><AppleLogo /></span> App Store İndir
-                        </Link>
+                        <Tooltip message={"Yakında"}>
+                            <Link href="/" className="px-6 py-2 text-white bg-schopiColor-primary rounded-md md:ml-5 flex" data-tooltip-target="tooltip-default">
+                                <span className={"mr-2"}><AppleLogo /></span> App Store İndir
+                            </Link>
+                        </Tooltip>
                     </div>
                 </div>
 
@@ -137,5 +139,14 @@ function AppleLogo() {
                 </g>
             </g>
         </svg>
+    )
+}
+
+function Tooltip({ message, children }: { message: string, children: React.ReactNode }) {
+    return (
+        <div className="group relative flex">
+            {children}
+            <span className="absolute top-12 left-1/2 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">{message}</span>
+        </div>
     )
 }
