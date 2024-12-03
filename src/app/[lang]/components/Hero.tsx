@@ -22,14 +22,16 @@ export default function Hero() {
 
                         <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
                             {/*Download App Store Button*/}
-                            <a
-                                href="/"
-                                target="_blank"
-                                rel="noopener"
-                                className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
-                                <AppleLogo/>
-                                <span className={'ml-2'}>App Store'dan İndir</span>
-                            </a>
+                            <Tooltip message={'Yakında'}>
+                                <a
+                                    href="/"
+                                    target="_blank"
+                                    rel="noopener"
+                                    className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
+                                    <AppleLogo/>
+                                    <span className={'ml-2'}>App Store'dan İndir</span>
+                                </a>
+                            </Tooltip>
 
                             {/*Get Web App Button*/}
                             <a
@@ -37,7 +39,7 @@ export default function Hero() {
                                 target="_blank"
                                 rel="noopener"
                                 className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
-                                <Image src={WebAppIcon} alt={'Web App Icon'} className={'w-8 h-8'}/>
+                            <Image src={WebAppIcon} alt={'Web App Icon'} className={'w-8 h-8'}/>
                                 <span className={'ml-2'}>Web Uygulamasını Kullan</span>
                             </a>
                         </div>
@@ -211,5 +213,14 @@ function AppleLogo() {
                 </g>
             </g>
         </svg>
+    )
+}
+
+function Tooltip({ message, children }: { message: string, children: React.ReactNode }) {
+    return (
+        <div className="group relative flex">
+            {children}
+            <span className="absolute top-12 left-24 translate-y-5 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">{message}</span>
+        </div>
     )
 }

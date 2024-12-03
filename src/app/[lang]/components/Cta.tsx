@@ -14,16 +14,28 @@ export const Cta = () => {
           </p>
         </div>
         <div className="flex-shrink-0 w-full text-center lg:w-auto">
-          <a
-            href="/"
-            target="_blank"
-            rel="noopener"
-            className="inline-block py-3 mx-auto text-lg font-medium text-center text-schopiColor-primary bg-white rounded-md px-7 lg:px-10 lg:py-5 "
-          >
-            App Store'dan İndir
-          </a>
+          <Tooltip message={'Yakında'}>
+            <a
+                href="/"
+                target="_blank"
+                rel="noopener"
+                className="inline-block py-3 mx-auto text-lg font-medium text-center text-schopiColor-primary bg-white rounded-md px-7 lg:px-10 lg:py-5 "
+            >
+              App Store'dan İndir
+            </a>
+          </Tooltip>
         </div>
       </div>
     </Container>
   );
 };
+
+function Tooltip({message, children}: { message: string, children: React.ReactNode }) {
+  return (
+      <div className="group relative flex">
+        {children}
+        <span
+            className="absolute top-20 left-24 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">{message}</span>
+      </div>
+  )
+}
