@@ -1,8 +1,184 @@
 {
+  "header": {
+    "logo": "Schopi",
+    "menu": {
+      "product": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookiePolicy": "Cookie Policy"
+    },
+    "cta": "Download the App"
+  },
+  "heroSection": {
+    "title": "Simplify Your Shopping Lists: Meet Schopi!",
+    "description": "You've never seen an app that makes creating and sharing lists this easy.",
+    "appleStoreDownload": "Download from App Store",
+    "useWebApp": "Use Web App"
+  },
   "downloadApp": "Download App",
   "section1": {
     "saveTime": "Save Time",
     "saveTimeDesc": "Save time by managing your account online",
-    "saveTimeText": "Schopi will save you more time while shopping and help you be more organized retrospectively."
+    "saveTimeText": "Schopi will help you save more time while shopping and be more organized."
+  },
+  "optionsSection": {
+    "title": "What Schopi App Offers You",
+    "description": "Schopi offers ease of use and advantages that will take your shopping experience to the next level. You will benefit while shopping with Schopi.",
+    "features": {
+      "feature1": {
+        "title": "Less Time, More Organization:",
+        "description": "Schopi speeds up your shopping process with its user-friendly design."
+      },
+      "feature2": {
+        "title": "Stay Connected with Family and Friends:",
+        "description": "Easily share your lists and make edits together."
+      },
+      "feature3": {
+        "title": "Anytime, Anywhere:",
+        "description": "Manage your shopping via mobile or web app."
+      }
+    }
+  },
+  "videoSection": {
+    "subtitle": "Watch a Video",
+    "title": "Get to Know Our Product Better",
+    "description": "Watch this video to better understand what awaits you while using Schopi.",
+    "comingSoonButtonText": "Coming Soon",
+    "playButtonText": "Play"
+  },
+  "testimonalSection": {
+    "subTitle": "Testimonials",
+    "title": "Here's What Our Customers Say",
+    "description": "Read about the experiences and satisfaction of our customers while using Schopi.",
+    "testimonials": {
+      "testimonial1": {
+        "name": "Ayşe Demir",
+        "job": "E-Commerce Specialist",
+        "comment": "<p class=\"text-2xl leading-normal \">Thanks to Schopi, I can quickly create my <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">shopping lists</mark>. We organized our shopping process perfectly with the suggestions of my team members.</p>"
+      },
+      "testimonial2": {
+        "name": "Mehmet Yılmaz",
+        "job": "Product Manager",
+        "comment": "<p class=\"text-2xl leading-normal \">Thanks to the compatibility of web and mobile applications, I can access my lists <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">anytime and anywhere</mark>. The user experience is really great!</p>"
+      },
+      "testimonial3": {
+        "name": "Zeynep Kaya",
+        "job": "Housewife",
+        "comment": "<p class=\"text-2xl leading-normal \">Schopi helped me stay <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">organized</mark> with my family. We have never done our holiday shopping this easily. The sharing feature is great!</p>"
+      }
+    }
+  },
+  "subscribeSection": {
+    "title": "Pricing",
+    "description": "Upgrade Your Shopping List with Premium Membership!",
+    "package1": {
+      "title": "Flexible",
+      "subtitle": "Monthly",
+      "realPrice": "$3.99",
+      "discountPrice": "$3.99",
+      "comingSoonButtonText": "Coming Soon",
+      "features": [
+        "All Premium Features",
+        "Sharing with Family Members",
+        "Unlimited list creation.",
+        "Ad-free usage.",
+        "Creating reminders for each list.",
+        "Sharing your lists with as many people as you want.",
+        "Using other features to be added to Schopi.",
+        "Premium support,"
+      ]
+    },
+    "package2": {
+      "title": "Popular",
+      "subtitle": "Annual",
+      "realPrice": "$49.99",
+      "discountPrice": "$39.99",
+      "discountLabel": "50% Discount",
+      "bestChoiceLabel": "Best Choice",
+      "comingSoonButtonText": "Coming Soon",
+      "features": [
+        "All Premium Features",
+        "Sharing with Family Members",
+        "Unlimited list creation.",
+        "Ad-free usage.",
+        "Creating reminders for each list.",
+        "Sharing your lists with as many people as you want.",
+        "Using other features to be added to Schopi.",
+        "Premium support,"
+      ]
+    },
+    "package3": {
+      "title": "Family Package",
+      "subtitle": "Annual / 5 People",
+      "realPrice": "$149.99",
+      "discountPrice": "$119.99",
+      "comingSoonButtonText": "Coming Soon",
+      "features": [
+        "All Premium Features",
+        "Sharing with Family Members",
+        "Unlimited list creation.",
+        "Ad-free usage.",
+        "Creating reminders for each list.",
+        "Sharing your lists with as many people as you want.",
+        "Using other features to be added to Schopi.",
+        "Premium support,"
+      ]
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "FAQ",
+    "description": "Find answers to the questions you are curious about Schopi here.",
+    "questions": [
+      {
+        "question": "What is Schopi?",
+        "answer": "Schopi is a shopping list application. With Schopi, you can create, edit, and share your shopping lists."
+      },
+      {
+        "question": "How can I purchase Schopi?",
+        "answer": "To purchase Schopi, download our app and create an account. Then, you can purchase Schopi using the in-app purchase option."
+      },
+      {
+        "question": "What is the price of Schopi?",
+        "answer": "The price information of Schopi is available within the app. Download the app to see the prices and make a purchase."
+      },
+      {
+        "question": "Is it difficult to set up Schopi?",
+        "answer": "No, setting up Schopi is quite easy. Download the app, create an account, and start creating your shopping lists."
+      },
+      {
+        "question": "What payment methods are supported by Schopi?",
+        "answer": "Schopi accepts payments through Apple and you can pay with a credit card."
+      },
+      {
+        "question": "Do you provide technical support for Schopi?",
+        "answer": "Yes, Schopi's technical support team is here to help you. If you have any questions, please contact us."
+      },
+      {
+        "question": "Are updates for Schopi free?",
+        "answer": "Yes, updates for Schopi are free and we regularly release updates to keep the app up to date."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Download the app and start using it immediately.",
+    "description": "Start your subscription at affordable prices.",
+    "appStoreDownload": "Download from App Store"
+  },
+  "footer": {
+    "description": "Benefit while shopping with Schopi. Manage both your time and money in the best way.",
+    "followUs": "Follow us",
+    "menu": {
+      "product": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookiePolicy": "Cookie Policy"
+    }
   }
 }

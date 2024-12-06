@@ -3,13 +3,20 @@ import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image"
 import {Disclosure} from "@headlessui/react";
+import Dictionary from "@/app/[lang]/dictionary";
 
-export default function Navbar() {
+interface NavbarProps {
+    dict: Dictionary;
+    lang: string;
+}
+
+export default function Navbar(props: NavbarProps) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const langParam = props.lang;
     const navigation = [
-        { name: "Özellikler", href: baseUrl+"#features" },
-        { name: "Fiyatlar", href: baseUrl+"#pricing" },
-        { name: "S.S.S", href: baseUrl+"#faq" },
+        {name: props.dict.header.menu.product, href: baseUrl + langParam + "#features"},
+        {name: props.dict.header.menu.pricing, href: baseUrl + langParam + "#pricing"},
+        {name: props.dict.header.menu.faq, href: baseUrl + langParam + "#faq"},
     ];
 
     return (
@@ -18,7 +25,8 @@ export default function Navbar() {
                 className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
                 {/* Logo  */}
                 <Link href="/">
-                  <span className="flex items-center space-x-2 text-2xl font-medium text-schopiColor-primary dark:text-gray-100">
+                  <span
+                      className="flex items-center space-x-2 text-2xl font-medium text-schopiColor-primary dark:text-gray-100">
                       <span>
                           <Logo/>
                       </span>
@@ -30,10 +38,23 @@ export default function Navbar() {
                     <ThemeChanger/>
                     <div className="hidden mr-3 lg:flex nav__item">
                         <Tooltip message={"Yakında"}>
-                            <Link href="/" className="px-6 py-2 text-white bg-schopiColor-primary rounded-md md:ml-5 flex" data-tooltip-target="tooltip-default">
-                                <span className={"mr-2"}><AppleLogo /></span> App Store İndir
+                            <Link href="/"
+                                  className="px-6 py-2 text-white bg-schopiColor-primary rounded-md md:ml-5 flex"
+                                  data-tooltip-target="tooltip-default">
+                                <span className={"mr-2"}><AppleLogo/></span> {props.dict.header.cta}
                             </Link>
                         </Tooltip>
+                    </div>
+                    {/*Lang Change Button*/}
+                    <div className="hidden lg:flex">
+                        <Link href={"/tr"}
+                              className={`text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary mr-2 rounded ${props.lang === 'tr' ? 'bg-schopiColor-primary text-white hover:text-white' : ''}`}>
+                            TR
+                        </Link>
+                        <Link href={"/en"}
+                              className={`text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary rounded ${props.lang === 'en' ? 'bg-schopiColor-primary text-white hover:text-white' : ''}`}>
+                            EN
+                        </Link>
                     </div>
                 </div>
 
@@ -72,9 +93,22 @@ export default function Navbar() {
                                         </Link>
                                     ))}
                                     <Link href="/"
-                                          className="w-full px-6 py-2 mt-3 text-center text-white schopiCpol rounded-md lg:ml-5">
-                                        Get Started
+                                          className="w-full px-6 py-2 mt-3 text-center text-white bg-schopiColor-primary rounded-md lg:ml-5 flex items-center justify-center">
+                                        <AppleLogo/>
+                                        {props.dict.header.cta}
                                     </Link>
+
+                                    {/*Language Buttons*/}
+                                    <div className="w-full mt-3 flex justify-center">
+                                        <Link href={"/tr"}
+                                              className={'text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary mr-2 rounded'}>
+                                            TR
+                                        </Link>
+                                        <Link href={"/en"}
+                                              className={'text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary rounded'}>
+                                            EN
+                                        </Link>
+                                    </div>
                                 </>
                             </Disclosure.Panel>
                         </>
@@ -125,7 +159,8 @@ function Logo() {
 
 function AppleLogo() {
     return (
-        <svg width={20} fill={'#fff'} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <svg width={20} fill={'#fff'} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+             className={'mr-2'}>
             <defs></defs>
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Dribbble-Light-Preview" transform="translate(-102.000000, -7439.000000)" fill="#ffffff">
@@ -142,11 +177,12 @@ function AppleLogo() {
     )
 }
 
-function Tooltip({ message, children }: { message: string, children: React.ReactNode }) {
+function Tooltip({message, children}: { message: string, children: React.ReactNode }) {
     return (
         <div className="group relative flex">
             {children}
-            <span className="absolute top-12 left-24 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">{message}</span>
+            <span
+                className="absolute top-12 left-24 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">{message}</span>
         </div>
     )
 }

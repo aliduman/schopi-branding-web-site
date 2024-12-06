@@ -1,133 +1,143 @@
+"use client";
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import Container from "../components/Container";
+import { useParams } from 'next/navigation';
+import { getDictionary } from './../dictionaries'
+import Dictionary from "@/app/[lang]/dictionary";
 
-export default function Footer() {
-    const navigation = [
-        {
-            name: "Ürünümüz",
-            href: "/",
-        },
-        {
-            name: "Özellikler",
-            href: "#features",
-        },
-        {
-            name: "Fiyat",
-            href: "#pricing",
-        },
-        {
-            name: "S.S.S",
-            href: "#faq",
-        },
-    ];
-    const legal = [
-        {
-            name: "Gizlilik",
-            href: "/privacy",
-        },
-        {
-            name: "Kullanım Koşulları",
-            href: "/terms",
-        },
-        {
-            name: "Çerez Politikası",
-            href: "/cookie-policy",
-        }
-    ];
-    return (
-        <div className="relative">
-            <Container>
-                <div
-                    className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
-                    <div className="lg:col-span-2">
+interface FooterProps {
+    dict: Dictionary;
+    lang: string;
+}
+export default function Footer(props: FooterProps) {
+    try {
+        const navigation = [
+            {
+                name: props.dict.footer.menu.product,
+                href: props.lang+"/",
+            },
+            {
+                name: props.dict.footer.menu.features,
+                href: props.lang+"#features",
+            },
+            {
+                name: props.dict.footer.menu.pricing,
+                href: props.lang+"#pricing",
+            },
+            {
+                name: props.dict.footer.menu.faq,
+                href: props.lang+"#faq",
+            },
+        ];
+        const legal = [
+            {
+                name: props.dict.footer.menu.privacyPolicy,
+                href: "/"+props.lang+"/privacy",
+            },
+            {
+                name: props.dict.footer.menu.termsOfService,
+                href: "/"+props.lang+"/terms",
+            },
+            {
+                name: props.dict.footer.menu.cookiePolicy,
+                href: "/"+props.lang+"/cookie-policy",
+            }
+        ];
+        return (
+            <div className="relative">
+                <Container>
+                    <div
+                        className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
+                        <div className="lg:col-span-2">
+                            <div>
+                                <Link
+                                    href="/"
+                                    className="flex items-center space-x-2 text-2xl font-medium text-schopiColor-primary dark:text-gray-100"
+                                >
+                                    <SchopiLogo/>
+                                </Link>
+                            </div>
+
+                            <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
+                                <p>
+                                    {props.dict.footer.description}
+                                </p>
+                            </div>
+
+                            <div className="mt-5"></div>
+                        </div>
+
                         <div>
-                            <Link
-                                href="/"
-                                className="flex items-center space-x-2 text-2xl font-medium text-schopiColor-primary dark:text-gray-100"
-                            >
-                                <SchopiLogo/>
-                            </Link>
+                            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
+                                {navigation.map((item, index) => (
+                                    <Link
+                                        key={index}
+                                        href={item.href}
+                                        className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
-
-                        <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
-                            <p>
-                                Schopi ile alışveriş yaparken kazançlı çıkın. Hem zamanınızı hem de paranızı en iyi
-                                şekilde yönetin.
-                            </p>
+                        <div>
+                            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
+                                {legal.map((item, index) => (
+                                    <Link
+                                        key={index}
+                                        href={item.href}
+                                        className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
-
-                        <div className="mt-5"></div>
-                    </div>
-
-                    <div>
-                        <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-                            {navigation.map((item, index) => (
-                                <Link
-                                    key={index}
-                                    href={item.href}
-                                    className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
+                        <div className="">
+                            <div>{props.dict.footer.followUs}</div>
+                            <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
+                                <a
+                                    href="https://twitter.com/schopi"
+                                    target="_blank"
+                                    rel="noopener"
                                 >
-                                    {item.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-                            {legal.map((item, index) => (
-                                <Link
-                                    key={index}
-                                    href={item.href}
-                                    className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
+                                    <span className="sr-only">Twitter</span>
+                                    <Twitter/>
+                                </a>
+                                <a
+                                    href="https://facebook.com/schopi"
+                                    target="_blank"
+                                    rel="noopener"
                                 >
-                                    {item.name}
-                                </Link>
-                            ))}
+                                    <span className="sr-only">Facebook</span>
+                                    <Facebook/>
+                                </a>
+                                <a
+                                    href="https://instagram.com/schopi"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    <span className="sr-only">Instagram</span>
+                                    <Instagram/>
+                                </a>
+                                <a href="https://linkedin.com/schopi" target="_blank" rel="noopener">
+                                    <span className="sr-only">Linkedin</span>
+                                    <Linkedin/>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div className="">
-                        <div>Bizi takip edin</div>
-                        <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
-                            <a
-                                href="https://twitter.com/schopi"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                <span className="sr-only">Twitter</span>
-                                <Twitter/>
-                            </a>
-                            <a
-                                href="https://facebook.com/schopi"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                <span className="sr-only">Facebook</span>
-                                <Facebook/>
-                            </a>
-                            <a
-                                href="https://instagram.com/schopi"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                <span className="sr-only">Instagram</span>
-                                <Instagram/>
-                            </a>
-                            <a href="https://linkedin.com/schopi" target="_blank" rel="noopener">
-                                <span className="sr-only">Linkedin</span>
-                                <Linkedin/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
-                <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
-                    Copyright © {new Date().getFullYear()}. All rights reserved.
-                </div>
-            </Container>
-        </div>
-    );
+                    <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
+                        Copyright © {new Date().getFullYear()}. All rights reserved.
+                    </div>
+                </Container>
+            </div>
+        );
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 const Twitter = ({size = 24}) => (

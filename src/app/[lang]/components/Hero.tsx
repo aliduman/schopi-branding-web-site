@@ -6,7 +6,13 @@ import Jumbotron from "public/img/jumbotron.svg";
 import JumbotronWhite from "public/img/jumbotron-white.svg";
 import WebAppIcon from "public/img/web-app-32.png";
 import {useTheme} from "next-themes";
-export default function Hero() {
+import React from "react";
+import Dictionary from "@/app/[lang]/dictionary";
+
+interface HeroProps {
+    dict?: Dictionary;
+}
+export default function Hero(props: any) {
     const { theme, setTheme } = useTheme();
     return (
         <>
@@ -14,10 +20,10 @@ export default function Hero() {
                 <div className="flex items-center w-full lg:w-1/2">
                     <div className="max-w-2xl mb-8">
                         <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-                            Alışveriş Listelerinizi Kolaylaştırın: Schopi ile Tanışın!
+                            {props.dict.heroSection.title}
                         </h1>
                         <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
-                            Liste oluşturmayı ve paylaşmayı hiç bu kadar kolay hale getiren bir uygulama görmediniz.
+                            {props.dict.heroSection.description}
                         </p>
 
                         <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
@@ -29,7 +35,9 @@ export default function Hero() {
                                     rel="noopener"
                                     className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
                                     <AppleLogo/>
-                                    <span className={'ml-2'}>App Store'dan İndir</span>
+                                    <span className={'ml-2'}>
+                                        {props.dict.heroSection.appleStoreDownload}
+                                    </span>
                                 </a>
                             </Tooltip>
 
@@ -40,7 +48,9 @@ export default function Hero() {
                                 rel="noopener"
                                 className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
                             <Image src={WebAppIcon} alt={'Web App Icon'} className={'w-8 h-8'}/>
-                                <span className={'ml-2'}>Web Uygulamasını Kullan</span>
+                                <span className={'ml-2'}>
+                                    {props.dict.heroSection.useWebApp}
+                                </span>
                             </a>
                         </div>
                     </div>

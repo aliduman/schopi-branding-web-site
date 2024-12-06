@@ -10,13 +10,13 @@ type Props = {
 export default async function PageRoute({params}: Props) {
     return (
         <Container style={{'paddingTop':175}}>
-            <CookiePolicy />
+            {params.lang === 'tr' ? <CookiePolicyTR /> : <CookiePolicyEN />}
         </Container>
     )
 }
 
 // pages/cookie-policy.js
-function CookiePolicy() {
+function CookiePolicyTR() {
     return (
         <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl font-bold mb-6 text-center">Çerez Politikası</h1>
@@ -100,6 +100,79 @@ function CookiePolicy() {
                 </p>
             </section>
         </div>
+    );
+}
+
+function CookiePolicyEN() {
+    return (
+       <div className="max-w-4xl mx-auto">
+    <h1 className="text-4xl font-bold mb-6 text-center">Cookie Policy</h1>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">1. What is a Cookie?</h2>
+        <p className="mb-4">
+            Cookies are small pieces of text that are saved on your device (computer, tablet, phone) when you visit a website. Cookies are used for personalizing site content, improving user experience, and for analytics.
+        </p>
+    </section>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">2. What Types of Cookies Do We Use?</h2>
+        <ul className="list-disc list-inside mb-4">
+            <li>
+                <strong>Necessary Cookies:</strong> Required for the basic functions of the application. For example, managing user sessions.
+            </li>
+            <li>
+                <strong>Performance Cookies:</strong> Used to analyze how the website is used and to improve its performance.
+            </li>
+            <li>
+                <strong>Functional Cookies:</strong> Used to remember user preferences (e.g., language selection).
+            </li>
+            <li>
+                <strong>Advertising Cookies:</strong> Can be used to show more relevant ads to the user (if applicable in your application).
+            </li>
+        </ul>
+    </section>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">3. Purposes of Using Cookies</h2>
+        <p className="mb-4">
+            Schopi may use cookies for the following purposes:
+        </p>
+        <ul className="list-disc list-inside">
+            <li>Improving user experience and providing personalized content.</li>
+            <li>Measuring and improving the technical performance of the website.</li>
+            <li>Collecting analytical information to understand user behavior.</li>
+        </ul>
+    </section>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">4. Cookie Management</h2>
+        <p className="mb-4">
+            You can change your cookie preferences or disable cookies entirely. Most browsers automatically accept cookies, but you can change your settings to prevent this. However, disabling cookies may cause some features of the application to not work.
+        </p>
+    </section>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">5. Third-Party Cookies</h2>
+        <p className="mb-4">
+            Schopi may work with third-party service providers such as Google Analytics for analysis and performance tracking. These service providers may place their own cookies on your device. The management of these cookies is subject to the privacy policies of the third parties.
+        </p>
+    </section>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">6. Cookie Policy Updates</h2>
+        <p className="mb-4">
+            Schopi may update this cookie policy from time to time. When any changes are made, we will notify our users on our website or application.
+        </p>
+    </section>
+
+    <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">7. Contact</h2>
+        <p>
+            If you have any questions about the cookie policy, please contact us at <a href="mailto:privacy@schopi.com" className="text-blue-500 underline">privacy@schopi.com</a>.
+        </p>
+    </section>
+</div>
     );
 }
 

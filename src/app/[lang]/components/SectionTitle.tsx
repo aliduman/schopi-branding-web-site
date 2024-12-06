@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../components/Container";
+import Dictionary from "@/app/[lang]/dictionary";
 
 interface SectionTitleProps {
   preTitle?: string;

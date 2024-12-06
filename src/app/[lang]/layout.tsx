@@ -9,6 +9,7 @@ import {ThemeProvider} from "next-themes";
 import {Inter} from "next/font/google";
 import {PopupWidget} from "@/app/[lang]/components/PopupWidget";
 import "./globals.css";
+import {getDictionary} from "@/app/[lang]/dictionaries";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -24,17 +25,18 @@ export default async function RootLayout({children, params,}: {
     readonly children: React.ReactNode;
     readonly params: { lang: string };
 }) {
+    const dict = await getDictionary(params.lang);
     return (
         <html lang={params.lang}>
         <body className={inter.className}>
         <ThemeProvider attribute="class">
-            <Navbar></Navbar>
+            <Navbar dict={dict} lang={params.lang}></Navbar>
 
             <main>
                 {children}
             </main>
 
-            <Footer/>
+            <Footer dict={dict} lang={params.lang}/>
             {/*<PopupWidget/>*/}
         </ThemeProvider>
         </body>

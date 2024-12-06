@@ -1,12 +1,14 @@
 "use client";
 import { useState } from "react";
 import Container from "../components/Container";
+import Dictionary from "@/app/[lang]/dictionary";
 
 interface VideoProps {
   videoId: string;
+  dict: Dictionary;
 }
 
-export function Video({ videoId }: Readonly<VideoProps>) {
+export function Video({ videoId, dict }: Readonly<VideoProps>) {
   const [playVideo, setPlayVideo] = useState(false);
 
   if (!videoId) return null;
@@ -31,7 +33,9 @@ export function Video({ videoId }: Readonly<VideoProps>) {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="sr-only">Play Video</span>
+            <span className="sr-only">
+                {dict.videoSection.playButtonText}
+            </span>
           </button>
         )}
         {playVideo && (
@@ -44,7 +48,9 @@ export function Video({ videoId }: Readonly<VideoProps>) {
 
             /*Coming Soon Template*/
             <div className="flex items-center justify-center w-full h-full text-white">
-              <h2 className="text-3xl font-bold">Coming Soon</h2>
+              <h2 className="text-3xl font-bold">
+                    {dict.videoSection.comingSoonButtonText}
+              </h2>
             </div>
         )}
       </div>

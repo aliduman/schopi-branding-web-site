@@ -1,8 +1,184 @@
 {
+  "header": {
+    "logo": "Schopi",
+    "menu": {
+      "product": "Ürün",
+      "features": "Özellikler",
+      "pricing": "Fiyatlar",
+      "faq": "S.S.S",
+      "privacyPolicy": "Gizlilik Politikası",
+      "termsOfService": "Hizmet Şartları",
+      "cookiePolicy": "Çerez Politikası"
+    },
+    "cta": "Uygulamayı İndir"
+  },
+  "heroSection": {
+    "title": "Alışveriş Listelerinizi Kolaylaştırın: Schopi ile Tanışın!",
+    "description": "Liste oluşturmayı ve paylaşmayı hiç bu kadar kolay hale getiren bir uygulama görmediniz.",
+    "appleStoreDownload": "App Store'dan İndir",
+    "useWebApp": "Web Uygulamasını Kullan"
+  },
   "downloadApp": "Uygulamayı İndir",
   "section1": {
     "saveTime": "Zaman Kazan",
     "saveTimeDesc": "Hesabınızı çevrimiçi yöneterek zaman kazanın",
     "saveTimeText": "Schopi, alışveriş yaparken daha fazla zaman kazanmanıza\n ve daha düzenli olmanıza yardımcı olacak."
+  },
+  "optionsSection": {
+    "title": "Schopi App size neler sunacak",
+    "description": "Schopi, alışveriş deneyiminizi en üst seviyeye çıkaracak kullanım kolaylığını ve avantajlarını sunar. Schopi ile alışveriş yaparken kazançlı çıkacaksınız.",
+    "features": {
+      "feature1": {
+        "title": "Daha Az Zaman, Daha Fazla Organize Olma:",
+        "description": "Schopi, kullanıcı dostu tasarımıyla alışveriş sürecinizi hızlandırır."
+      },
+      "feature2": {
+        "title": "Aile ve Arkadaşlarla Bağlantıda Kalın:",
+        "description": "Listelerinizi kolayca paylaşın ve düzenlemeleri birlikte yapın."
+      },
+      "feature3": {
+        "title": "Her Zaman ve Her Yerde:",
+        "description": "İster mobil, ister web uygulaması üzerinden alışverişinizi yönetin."
+      }
+    }
+  },
+  "videoSection": {
+    "subtitle": "Bir video izleyin",
+    "title": "Ürünümüzü daha yakından tanıyın",
+    "description": "Schopi'yi kullanırken sizi neler beklediğini daha iyi anlamak için bu videoyu izleyin.",
+    "comingSoonButtonText": "Yakında",
+    "playButtonText": "Oynat"
+  },
+  "testimonalSection": {
+    "subTitle": "Görüşler",
+    "title": "İşte müşterilerimizin söyledikleri",
+    "description": "Müşterilerimizin Schopi'yi kullanırken yaşadıkları deneyimleri ve memnuniyetlerini okuyun.",
+    "testimonials": {
+      "testimonial1": {
+        "name": "Ayşe Demir",
+        "job": "E-Ticaret Uzmanı",
+        "comment": "<p class=\"text-2xl leading-normal \">Schopi sayesinde  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">alışveriş listelerimi</mark>  hızlıca oluşturabiliyorum. Ekip arkadaşlarımın önerileriyle alışveriş sürecimizi mükemmel bir şekilde organize ettik."
+      },
+      "testimonial2": {
+        "name": "Mehmet Yılmaz",
+        "job": "Ürün Müdürü",
+        "comment": "<p class=\"text-2xl leading-normal \">Web ve mobil uygulamaların uyumu sayesinde,  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">her zaman ve her yerde</mark>  listelerime erişebiliyorum. Kullanıcı deneyimi gerçekten harika!</p>"
+      },
+      "testimonial3": {
+        "name": "Zeynep Kaya",
+        "job": "Ev Hanımı",
+        "comment": "<p class=\"text-2xl leading-normal \">Schopi, ailemle  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">organize</mark>  olmamı sağladı. Tatil alışverişlerimizi hiç bu kadar kolay yapmamıştık. Paylaşım özelliği harika!</p>"
+      }
+    }
+  },
+  "subscribeSection": {
+    "title": "Fiyatlar",
+    "description": "Premium Üyelikle Alışveriş Listenizi Yükseltin!",
+    "package1": {
+      "title": "Esnek",
+      "subtitle": "Aylık",
+      "realPrice": "4,99 $",
+      "discountPrice": "3,99 $",
+      "comingSoonButtonText": "Yakında",
+      "features": [
+        "Tüm Premium Özellikler",
+        "Aile Üyeleriyle Paylaşım",
+        "Sınırsız liste oluşturma.",
+        "Reklamsız kullanım.",
+        "Her bir liste için hatırlatıcı oluşturma.",
+        "Listelerinizi dilediğiniz kadar kişi ile paylaşma",
+        "Schopi’ye eklenecek diğer özellikleri kullanma.",
+        "Premium destek,"
+      ]
+    },
+    "package2": {
+      "title": "Popüler",
+      "subtitle": "Yıllık",
+      "realPrice": "49,99 $",
+      "discountPrice": "39,99 $",
+      "comingSoonButtonText": "Yakında",
+      "discountLabel": "%50 İndirim",
+      "bestChoiceLabel": "En İyi Seçim",
+      "features": [
+        "Tüm Premium Özellikler",
+        "Aile Üyeleriyle Paylaşım",
+        "Sınırsız liste oluşturma.",
+        "Reklamsız kullanım.",
+        "Her bir liste için hatırlatıcı oluşturma.",
+        "Listelerinizi dilediğiniz kadar kişi ile paylaşma",
+        "Schopi’ye eklenecek diğer özellikleri kullanma.",
+        "Premium destek,"
+      ]
+    },
+    "package3": {
+      "title": "Aile Paketi",
+      "subtitle": "Yıllık / 5 Kişi",
+      "realPrice": "149,99 $",
+      "discountPrice": "119,99 $",
+      "comingSoonButtonText": "Yakında",
+      "features": [
+        "Tüm Premium Özellikler",
+        "Aile Üyeleriyle Paylaşım",
+        "Sınırsız liste oluşturma.",
+        "Reklamsız kullanım.",
+        "Her bir liste için hatırlatıcı oluşturma.",
+        "Listelerinizi dilediğiniz kadar kişi ile paylaşma",
+        "Schopi’ye eklenecek diğer özellikleri kullanma.",
+        "Premium destek,"
+      ]
+    }
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "subtitle": "S.S.S",
+    "description": "Schopi hakkında merak ettiğiniz soruların yanıtlarını burada bulabilirsiniz.",
+    "questions": [
+      {
+        "question": "Schopi nedir?",
+        "answer": "Schopi, alışveriş listesi uygulamasıdır. Schopi ile alışveriş listelerinizi oluşturabilir, düzenleyebilir ve paylaşabilirsiniz."
+      },
+      {
+        "question": "Schopi'yi nasıl satın alabilirim?",
+        "answer": "Schopi'yi satın almak için uygulamamızı indirin ve bir hesap oluşturun. Daha sonra, uygulama içi satın alma seçeneğini kullanarak Schopi'yi satın alabilirsiniz."
+      },
+      {
+        "question": "Schopi'nin fiyatı nedir?",
+        "answer": "Schopi'nin fiyat bilgileri uygulama içinde mevcuttur. Uygulamayı indirerek fiyatları görebilir ve satın alabilirsiniz."
+      },
+      {
+        "question": "Schopi'nin kurulumu zor mu?",
+        "answer": "Hayır, Schopi'nin kurulumu oldukça kolaydır. Uygulamayı indirin, bir hesap oluşturun ve alışveriş listelerinizi oluşturmaya başlayın."
+      },
+      {
+        "question": "Schopi'nin desteklenen ödeme yöntemleri nelerdir?",
+        "answer": "Schopi, Apple üzerinden ödeme kabul eder ve kredi kartı ile ödeme yapabilirsiniz."
+      },
+      {
+        "question": "Schopi'nin teknik destek sunuyor musunuz?",
+        "answer": "Evet, Schopi'nin teknik destek ekibi size yardımcı olmak için burada. Herhangi bir sorunuz varsa, lütfen bize ulaşın."
+      },
+      {
+        "question": "Schopi'nin güncellemeleri ücretsiz mi?",
+        "answer": "Evet, Schopi'nin güncellemeleri ücretsizdir ve uygulamayı güncel tutmak için düzenli olarak güncellemeler yayınlarız."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Uygulamayı indirin ve hemen kullanmaya başlayın.",
+    "description": "Uygun fiyatlarla hemen aboneliğinizi başlatın.",
+    "appStoreDownload": "App Store'dan İndir"
+  },
+  "footer": {
+    "description": "Schopi ile alışveriş yaparken kazançlı çıkın. Hem zamanınızı hem de paranızı en iyi şekilde yönetin.",
+    "followUs": "Bizi takip edin",
+    "menu": {
+      "product": "Ürün",
+      "features": "Özellikler",
+      "pricing": "Fiyatlar",
+      "faq": "S.S.S",
+      "privacyPolicy": "Gizlilik Politikası",
+      "termsOfService": "Hizmet Şartları",
+      "cookiePolicy": "Çerez Politikası"
+    }
   }
 }

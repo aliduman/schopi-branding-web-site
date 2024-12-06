@@ -1,105 +1,98 @@
 import Image from "next/image";
 import React from "react";
 import Container from "../components/Container";
+import Dictionary from "@/app/[lang]/dictionary";
 
-export default function Pricing(props: Readonly<any>) {
-    const {data} = props;
+interface PricingProps {
+    dict: Dictionary;
+    id: string;
+}
+export default function Pricing(props: Readonly<PricingProps>) {
     return (
         <Container className="pt-16" id={props.id} style={{'paddingTop': 175}}>
             <div className="max-w-screen-xl py-10 mx-auto mt-auto">
                 <div className="text-center">
-                    <h1 className="my-3 text-3xl font-bold tracking-tight text-gray-800 md:text-5xl dark:text-gray-100">Abonelik</h1>
+                    <h1 className="my-3 text-3xl font-bold tracking-tight text-gray-800 md:text-5xl dark:text-gray-100">
+                        {props.dict.subscribeSection.title}
+                    </h1>
                     <p className="max-w-2xl mx-auto my-2 text-lg leading-relaxed text-gray-500 md:text-xl dark:text-gray-400">
-                        Premium Üyelikle Alışveriş Listenizi Yükseltin!
+                        {props.dict.subscribeSection.description}
                     </p>
                 </div>
                 <div className="flex flex-col lg:flex-row w-full gap-10 mt-12 place-items-center">
                     <div
                         className="flex max-w-md flex-col w-full order-first lg:order-none border-2 border-[#D8DEE9] border-opacity-50 p-8 rounded-md">
                         <div className="text-center">
-                            <h4 className="text-xl font-semibold text-gray-600 dark:text-gray-300">Esnek</h4>
-                            <h3 className="text-xs text-gray-300">Aylık</h3>
-                            <p className="mt-3 text-4xl font-extrabold md:text-5xl dark:text-white">3,99 $</p>
-                            <p className="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">4,99 $</p>
+                            <h4 className="text-xl font-semibold text-gray-600 dark:text-gray-300">
+                                {props.dict.subscribeSection.package1.title}
+                            </h4>
+                            <h3 className="text-xs text-gray-300">
+                                {props.dict.subscribeSection.package1.subtitle}
+                            </h3>
+                            <p className="mt-3 text-4xl font-extrabold md:text-5xl dark:text-white">
+                                {props.dict.subscribeSection.package1.discountPrice}
+                            </p>
+                            <p className="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">
+                                {props.dict.subscribeSection.package1.realPrice}
+                            </p>
                         </div>
                         <ul className="grid max-w-sm mt-8 text-left gap-y-4">
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Sınırsız liste oluşturma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Reklamsız kullanım.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Her bir liste için hatırlatıcı oluşturma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Listelerinizi dilediğiniz kadar kişi ile paylaşma</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Schopi’ye eklenecek diğer özellikleri kullanma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Premium destek</span>
-                            </li>
+                            {/*features loop*/}
+                            {props.dict.subscribeSection.package1.features.map((feature, index) => (
+                                <li key={index} className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
+                                    <CheckIcon/>
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
                         </ul>
                         <div className="mt-auto">
                             <button
                                 className="flex items-center justify-center w-full gap-3 px-10 py-4 mx-auto mt-10 font-medium text-schopiColor-primary transition-colors border-2 border-schopiColor-primary rounded-full hover:bg-schopiColor-primary hover:text-white">
-                                <span> Yakında</span>
+                                <span>
+                                    {props.dict.subscribeSection.package1.comingSoonButtonText}
+                                </span>
                             </button>
                         </div>
                     </div>
                     <div
                         className="flex max-w-md flex-col w-full order-first lg:order-none border-2 border-[#D8DEE9] border-opacity-50 p-8 rounded-md relative">
                         <span
-                            className="absolute top-0 right-0 px-3 py-1 text-xs font-bold text-white bg-schopiColor-primary rounded-bl-md">En iyi seçim</span>
+                            className="absolute top-0 right-0 px-3 py-1 text-xs font-bold text-white bg-schopiColor-primary rounded-bl-md">
+                            {props.dict.subscribeSection.package2.bestChoiceLabel}
+                        </span>
                         <div className="text-center">
-                            <h4 className="text-xl font-semibold text-gray-600 dark:text-gray-300">Popüler</h4>
-                            <h3 className="text-xs text-gray-300">Yıllık</h3>
-                            <p className="mt-3 text-4xl font-extrabold text-schopiColor-primary md:text-5xl">39,99 $</p>
-                            <p className="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">49,99 $</p>
+                            <h4 className="text-xl font-semibold text-gray-600 dark:text-gray-300">
+                                {props.dict.subscribeSection.package2.title}
+                            </h4>
+                            <h3 className="text-xs text-gray-300">
+                                {props.dict.subscribeSection.package2.subtitle}
+                            </h3>
+                            <p className="mt-3 text-4xl font-extrabold text-schopiColor-primary md:text-5xl">
+                                {props.dict.subscribeSection.package2.discountPrice}
+                            </p>
+                            <p className="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">
+                                {props.dict.subscribeSection.package2.realPrice}
+                            </p>
                         </div>
                         <ul className="grid max-w-sm mt-8 text-left gap-y-4">
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Sınırsız liste oluşturma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Reklamsız kullanım.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Her bir liste için hatırlatıcı oluşturma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Listelerinizi dilediğiniz kadar kişi ile paylaşma</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Schopi’ye eklenecek diğer özellikleri kullanma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Premium destek</span>
-                            </li>
+                            {props.dict.subscribeSection.package1.features.map((feature, index) => (
+                                <li key={index} className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
+                                    <CheckIcon/>
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
                         </ul>
                         <div className="">
                             <a className="flex items-center justify-center w-full gap-3 px-5 py-4 mx-auto mt-10 font-medium text-white transition-colors bg-schopiColor-primary border border-transparent rounded-full hover:bg-schopiColor-primary"
                                href="/">
                         <span>
-                            <span>Yakında</span>
+                            <span>
+                                {props.dict.subscribeSection.package2.comingSoonButtonText}
+                            </span>
                         </span>
                                 <span
                                     className="px-3 py-1 ml-px text-xs font-bold rounded-full text-schopiColor-primary bg-violet-50 lg:hidden xl:inline">
-                            %50 İNDİRİM
+                            {props.dict.subscribeSection.package2.discountLabel}
                         </span>
                             </a>
                         </div>
@@ -107,41 +100,33 @@ export default function Pricing(props: Readonly<any>) {
                     <div
                         className="flex max-w-md flex-col w-full order-first lg:order-none border-2 border-[#D8DEE9] border-opacity-50 p-8 rounded-md">
                         <div className="text-center">
-                            <h4 className="text-xl font-semibold text-gray-600 dark:text-gray-300">Aile Paketi</h4>
-                            <h3 className="text-xs text-gray-300">Yıllık / 5 Kişi</h3>
-                            <p className="mt-3 text-4xl font-extrabold md:text-5xl dark:text-white">119,99 $</p>
-                            <p className="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">149,99 $</p>
+                            <h4 className="text-xl font-semibold text-gray-600 dark:text-gray-300">
+                                {props.dict.subscribeSection.package3.title}
+                            </h4>
+                            <h3 className="text-xs text-gray-300">
+                                {props.dict.subscribeSection.package3.subtitle}
+                            </h3>
+                            <p className="mt-3 text-4xl font-extrabold md:text-5xl dark:text-white">
+                                {props.dict.subscribeSection.package3.discountPrice}
+                            </p>
+                            <p className="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">
+                                {props.dict.subscribeSection.package3.realPrice}
+                            </p>
                         </div>
                         <ul className="grid max-w-sm mt-8 text-left gap-y-4">
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Sınırsız liste oluşturma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Reklamsız kullanım.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Her bir liste için hatırlatıcı oluşturma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Listelerinizi dilediğiniz kadar kişi ile paylaşma</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Schopi’ye eklenecek diğer özellikleri kullanma.</span>
-                            </li>
-                            <li className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
-                                <CheckIcon/>
-                                <span>Premium destek</span>
-                            </li>
+                            {props.dict.subscribeSection.package1.features.map((feature, index) => (
+                                <li key={index} className="flex items-start gap-3 text-gray-800 dark:text-gray-100">
+                                    <CheckIcon/>
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
                         </ul>
                         <div className="mt-auto">
                             <button
                                 className="flex items-center justify-center w-full gap-3 px-10 py-4 mx-auto mt-10 font-medium text-schopiColor-primary transition-colors border-2 border-schopiColor-primary rounded-full hover:bg-schopiColor-primary hover:text-white">
-                                <span> Yakında</span>
+                                <span>
+                                    {props.dict.subscribeSection.package3.comingSoonButtonText}
+                                </span>
                             </button>
                         </div>
                     </div>

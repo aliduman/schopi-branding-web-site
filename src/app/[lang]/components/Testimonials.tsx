@@ -4,46 +4,46 @@ import Container from "../components/Container";
 import userAyseDemir from "public/img/testimonal-users/ayse-demir.png";
 import userMehmetYilmaz from "public/img/testimonal-users/mehmet-yilmaz.png";
 import userZeynepKaya from "public/img/testimonal-users/zeynep-kaya.png";
-export const Testimonials = () => {
+import Dictionary from "@/app/[lang]/dictionary";
+
+interface testimonailsProps {
+  dict: Dictionary
+}
+
+export const Testimonials = (props: testimonailsProps) => {
   return (
     <Container>
       <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
         <div className="lg:col-span-2 xl:col-auto">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              Schopi sayesinde <Mark>alışveriş listelerimi</Mark> hızlıca oluşturabiliyorum. Ekip arkadaşlarımın önerileriyle alışveriş sürecimizi mükemmel bir şekilde organize ettik.
-            </p>
+            <div className="text-2xl leading-normal" dangerouslySetInnerHTML={{__html: props.dict.testimonalSection.testimonials.testimonial1.comment}}></div>
 
             <Avatar
               image={userAyseDemir}
-              name="Ayşe Demir"
-              title="E-Ticaret Uzmanı"
+              name={props.dict.testimonalSection.testimonials.testimonial1.name}
+              title={props.dict.testimonalSection.testimonials.testimonial1.job}
             />
           </div>
         </div>
         <div className="">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              Web ve mobil uygulamaların uyumu sayesinde, <Mark>her zaman ve her yerde</Mark> listelerime erişebiliyorum. Kullanıcı deneyimi gerçekten harika!
-            </p>
+            <div className="text-2xl leading-normal" dangerouslySetInnerHTML={{__html: props.dict.testimonalSection.testimonials.testimonial2.comment}}></div>
 
             <Avatar
               image={userMehmetYilmaz}
-              name="Mehmet Yılmaz"
-              title="Ürün Müdürü"
+              name={props.dict.testimonalSection.testimonials.testimonial2.name}
+              title={props.dict.testimonalSection.testimonials.testimonial2.job}
             />
           </div>
         </div>
         <div className="">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              Schopi, ailemle <Mark>organize</Mark> olmamı sağladı. Tatil alışverişlerimizi hiç bu kadar kolay yapmamıştık. Paylaşım özelliği harika!
-            </p>
+            <div className="text-2xl leading-normal" dangerouslySetInnerHTML={{__html: props.dict.testimonalSection.testimonials.testimonial3.comment}}></div>
 
             <Avatar
               image={userZeynepKaya}
-              name="Zeynep Kaya"
-              title="Ev Hanımı"
+              name={props.dict.testimonalSection.testimonials.testimonial3.name}
+              title={props.dict.testimonalSection.testimonials.testimonial3.job}
             />
           </div>
         </div>
