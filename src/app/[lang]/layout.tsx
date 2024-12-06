@@ -28,10 +28,13 @@ export default async function RootLayout({children, params,}: {
 }) {
     const dict = await getDictionary(params.lang);
 
+    let metaTitle = metadata.metaTitle;
+    let metaDescription = metadata.metaDescription;
+
     // En dictionary is used for metadata
     if (params.lang === "en") {
-        metadata.metaTitle = metaDataEn.metaTitle;
-        metadata.metaDescription = metaDataEn.metaDescription;
+        metaTitle = metaDataEn.metaTitle;
+        metaDescription = metaDataEn.metaDescription;
     }
 
     return (
@@ -40,8 +43,8 @@ export default async function RootLayout({children, params,}: {
             <meta charSet="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <link rel="icon" href="/favicon.ico"/>
-            <title>{metadata.metaTitle}</title>
-            <meta name="description" content={metadata.metaDescription}/>
+            <title>{metaTitle}</title>
+            <meta name="description" content={metaDescription}/>
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png"/>
             <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"/>
             <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png"/>
