@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 import metadata from "../../../metadata.json";
+import metaDataEn from "../../../metadata.en.json";
 import {ThemeProvider} from "next-themes";
 import {Inter} from "next/font/google";
 import {PopupWidget} from "@/app/[lang]/components/PopupWidget";
@@ -26,6 +27,13 @@ export default async function RootLayout({children, params,}: {
     readonly params: { lang: string };
 }) {
     const dict = await getDictionary(params.lang);
+
+    // En dictionary is used for metadata
+    if (params.lang === "en") {
+        metadata.metaTitle = metaDataEn.metaTitle;
+        metadata.metaDescription = metaDataEn.metaDescription;
+    }
+
     return (
         <html lang={params.lang}>
         <head>
