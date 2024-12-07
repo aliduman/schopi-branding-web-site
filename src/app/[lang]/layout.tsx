@@ -70,12 +70,12 @@ export default async function RootLayout({children, params,}: {
 
             <main>
                 {children}
+                <SpeedInsights/>
             </main>
 
             <Footer dict={dict} lang={params.lang}/>
             {/*<PopupWidget/>*/}
         </ThemeProvider>
-        <SpeedInsights/>
         </body>
         </html>
     );
