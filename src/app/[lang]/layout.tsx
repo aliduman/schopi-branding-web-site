@@ -11,6 +11,7 @@ import {Inter} from "next/font/google";
 import {PopupWidget} from "@/app/[lang]/components/PopupWidget";
 import "./globals.css";
 import {getDictionary} from "@/app/[lang]/dictionaries";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -74,6 +75,7 @@ export default async function RootLayout({children, params,}: {
             <Footer dict={dict} lang={params.lang}/>
             {/*<PopupWidget/>*/}
         </ThemeProvider>
+        <SpeedInsights/>
         </body>
         </html>
     );
