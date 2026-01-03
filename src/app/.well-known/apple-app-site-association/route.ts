@@ -6,7 +6,7 @@ export async function GET() {
       apps: [],
       details: [
         {
-          appID: "com.Schopi",
+          appID: "V5VT48Q5X3.com.Schopi",
           paths: ["/invite"]
         }
       ]
