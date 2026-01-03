@@ -42,6 +42,11 @@ export function middleware(request: NextRequest) {
         return;
     }
 
+    // Exclude .well-known paths from locale redirection
+    if (pathname.startsWith('/.well-known')) {
+        return;
+    }
+
     // Check if there is any supported locale in the pathname
     const pathnameIsMissingLocale = i18n.locales.every(
         (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
