@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "V5VT48Q5X3.com.Schopi",
-        "paths": [ "/invite" ]
+        "paths": ["/invite*"]
       }
     ]
   }
