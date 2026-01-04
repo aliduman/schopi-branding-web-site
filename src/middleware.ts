@@ -42,8 +42,7 @@ export function middleware(request: NextRequest) {
         return;
     }
 
-    // Exclude .well-known paths from locale redirection
-    if (pathname.startsWith('/.well-known')) {
+    if (pathname.startsWith('/img')) {
         return;
     }
 
@@ -63,6 +62,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    // Matcher ignoring `/_next/` and `/api/`
-    matcher: ['/((?!_next).*)'],
+    // Matcher ignoring `/_next/`, `/.well-known/` paths
+    // .well-known is excluded from matcher so middleware never runs for it
+    matcher: ['/((?!_next|\\.well-known).*)'],
 };
