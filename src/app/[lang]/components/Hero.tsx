@@ -43,7 +43,7 @@ export default function Hero(props: any) {
 
                             {/*Get Web App Button*/}
                             <a
-                                href="https://schopiapp.com"
+                                href="https://app.schopi.com"
                                 target="_blank"
                                 rel="noopener"
                                 className="px-8 py-4 text-lg font-medium text-center text-white bg-schopiColor-primary rounded-md flex items-center">
