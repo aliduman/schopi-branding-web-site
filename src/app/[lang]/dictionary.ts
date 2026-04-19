@@ -15,6 +15,7 @@ export default interface Dictionary {
     heroSection: {
         title: string;
         description: string;
+        badgeText: string;
         appleStoreDownload: string;
         useWebApp: string;
     };

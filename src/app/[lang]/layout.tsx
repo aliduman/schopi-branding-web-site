@@ -39,7 +39,7 @@ export default async function RootLayout({children, params,}: {
     }
 
     return (
-        <html lang={params.lang}>
+        <html lang={params.lang} suppressHydrationWarning>
         <head>
             <meta charSet="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>

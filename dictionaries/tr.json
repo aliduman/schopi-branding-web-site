@@ -15,8 +15,9 @@
   "heroSection": {
     "title": "Alışveriş Listelerinizi Kolaylaştırın: Schopi ile Tanışın!",
     "description": "Liste oluşturmayı ve paylaşmayı hiç bu kadar kolay hale getiren bir uygulama görmediniz.",
-    "appleStoreDownload": "App Store'dan İndir",
-    "useWebApp": "Web Uygulamasını Kullan"
+    "badgeText": "Akıllı Alışveriş Listesi",
+    "appleStoreDownload": "App Store",
+    "useWebApp": "Web Uygulaması"
   },
   "downloadApp": "Uygulamayı İndir",
   "section1": {
@@ -166,7 +167,7 @@
   "cta": {
     "title": "Uygulamayı indirin ve hemen kullanmaya başlayın.",
     "description": "Uygun fiyatlarla hemen aboneliğinizi başlatın.",
-    "appStoreDownload": "App Store'dan İndir"
+    "appStoreDownload": "App Store"
   },
   "footer": {
     "description": "Schopi ile alışveriş yaparken kazançlı çıkın. Hem zamanınızı hem de paranızı en iyi şekilde yönetin.",

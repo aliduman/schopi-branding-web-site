@@ -1,19 +1,20 @@
 "use client";
 import Image from "next/image";
 import Container from "../components/Container";
-import BenefitOne from "public/img/benefit-one.png";
 import Jumbotron from "public/img/jumbotron.svg";
 import JumbotronWhite from "public/img/jumbotron-white.svg";
 import WebAppIcon from "public/img/web-app-32.png";
 import {useTheme} from "next-themes";
 import React from "react";
-import Dictionary from "@/app/[lang]/dictionary";
-
-interface HeroProps {
-    dict?: Dictionary;
-}
 export default function Hero(props: any) {
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const isDarkMode = mounted && resolvedTheme === "dark";
     return (
         <>
             <Container className="flex flex-wrap pt-[175px]" id={'product'}>
@@ -58,7 +59,7 @@ export default function Hero(props: any) {
                 <div className="flex items-center justify-center w-full lg:w-1/2">
                     <div className="">
                         <Image
-                            src={theme === "dark" ? Jumbotron : JumbotronWhite}
+                            src={isDarkMode ? JumbotronWhite : Jumbotron}
                             width="616"
                             height="617"
                             className={"object-cover"}

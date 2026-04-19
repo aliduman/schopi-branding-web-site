@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:3000/tr -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:3000/tr)",
+      "Bash(jobs *)",
+      "Bash(npx tsc *)",
+      "Bash(curl *)",
+      "Bash(open *)",
+      "Bash(ffprobe -v quiet -print_format json -show_streams /Users/aliduman/www/schopi-branding-web-site/public/schopi-onboarding-video.mov)",
+      "Bash(ffmpeg -i /Users/aliduman/www/schopi-branding-web-site/public/schopi-onboarding-video.mov -vf \"fps=1/8,scale=603:-1\" /Users/aliduman/www/schopi-branding-web-site/public/img/screenshots/frame_%03d.jpg -y)",
+      "Bash(ffmpeg -i public/schopi-onboarding-video.mov -vf scale=603:-2 -c:v libx264 -crf 28 -preset fast -movflags +faststart -an public/schopi-demo.mp4 -y)",
+      "Bash(ffmpeg *)",
+      "mcp__stitch__create_project",
+      "Bash(sudo chown *)",
+      "Bash(pkill -f \"next dev\")",
+      "WebFetch(domain:www.schopi.com)",
+      "WebFetch(domain:schopi.com)"
+    ]
+  }
+}

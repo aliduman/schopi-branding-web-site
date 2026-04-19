@@ -46,6 +46,11 @@ export function middleware(request: NextRequest) {
         return;
     }
 
+    // Exclude static files (videos, images, fonts, etc.)
+    if (/\.(mp4|mov|webm|jpg|jpeg|png|gif|svg|webp|ico|woff|woff2|ttf|otf|pdf)$/i.test(pathname)) {
+        return;
+    }
+
     // Check if there is any supported locale in the pathname
     const pathnameIsMissingLocale = i18n.locales.every(
         (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`

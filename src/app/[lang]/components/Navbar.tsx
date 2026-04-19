@@ -1,7 +1,7 @@
 "use client";
+import {useEffect, useRef, useState} from "react";
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
-import Image from "next/image"
 import {Disclosure} from "@headlessui/react";
 import Dictionary from "@/app/[lang]/dictionary";
 
@@ -13,16 +13,73 @@ interface NavbarProps {
 export default function Navbar(props: NavbarProps) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     const langParam = props.lang;
+    const [activeHash, setActiveHash] = useState("#features");
+    const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+    const langMenuRef = useRef<HTMLDivElement | null>(null);
+    const currentLangLabel = props.lang === "en" ? "EN" : "TR";
+    const languageOptions = [
+        {code: "tr", label: "TR"},
+        {code: "en", label: "EN"},
+    ];
     const navigation = [
-        {name: props.dict.header.menu.product, href: baseUrl + langParam + "#features"},
-        {name: props.dict.header.menu.pricing, href: baseUrl + langParam + "#pricing"},
-        {name: props.dict.header.menu.faq, href: baseUrl + langParam + "#faq"},
+        {name: props.dict.header.menu.product, href: baseUrl + langParam + "#features", hash: "#features"},
+        {name: props.dict.header.menu.pricing, href: baseUrl + langParam + "#pricing", hash: "#pricing"},
+        {name: props.dict.header.menu.faq, href: baseUrl + langParam + "#faq", hash: "#faq"},
     ];
 
+    useEffect(() => {
+        const updateActiveFromHash = () => {
+            const hash = window.location.hash;
+            if (hash) {
+                setActiveHash(hash);
+            }
+        };
+
+        updateActiveFromHash();
+        window.addEventListener("hashchange", updateActiveFromHash);
+
+        const sections = navigation
+            .map((item) => document.querySelector(item.hash) as HTMLElement | null)
+            .filter((section): section is HTMLElement => Boolean(section));
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visibleEntry = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+                if (visibleEntry?.target?.id) {
+                    setActiveHash(`#${visibleEntry.target.id}`);
+                }
+            },
+            {threshold: 0.35}
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        return () => {
+            window.removeEventListener("hashchange", updateActiveFromHash);
+            observer.disconnect();
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleOutsideClick = (event: MouseEvent) => {
+            if (!langMenuRef.current) return;
+            if (!langMenuRef.current.contains(event.target as Node)) {
+                setIsLangMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleOutsideClick);
+        return () => document.removeEventListener("mousedown", handleOutsideClick);
+    }, []);
+
     return (
-        <div className="w-full fixed bg-trueGray-50 dark:bg-trueGray-900 shadow-2xl z-10">
+        <div className="fixed top-3 inset-x-0 z-50 px-3 md:px-6">
+            <div className="mx-auto max-w-7xl rounded-2xl border border-white/60 dark:border-white/15 bg-gradient-to-r from-white/75 via-white/65 to-orange-50/55 dark:from-gray-950/80 dark:via-gray-900/75 dark:to-gray-950/80 shadow-[0_10px_40px_rgba(2,6,23,0.12)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.45)]" style={{ backdropFilter: "blur(20px)" }}>
             <nav
-                className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
+                className="relative flex flex-wrap items-center justify-between px-4 py-3 mx-auto lg:justify-between sm:px-6 xl:px-8">
                 {/* Logo  */}
                 <Link href="/">
                   <span
@@ -39,22 +96,37 @@ export default function Navbar(props: NavbarProps) {
                     <div className="hidden mr-3 lg:flex nav__item">
                         <Tooltip message={"Yakında"}>
                             <Link href="/"
-                                  className="px-6 py-2 text-white bg-schopiColor-primary rounded-md md:ml-5 flex"
+                                  className="px-5 py-2.5 text-white bg-gradient-to-r from-schopiColor-primary to-orange-400 rounded-xl md:ml-5 flex shadow-[0_8px_24px_rgba(248,75,24,0.28)] hover:-translate-y-0.5 transition-all duration-200"
                                   data-tooltip-target="tooltip-default">
                                 <span className={"mr-2"}><AppleLogo/></span> {props.dict.header.cta}
                             </Link>
                         </Tooltip>
                     </div>
-                    {/*Lang Change Button*/}
-                    <div className="hidden lg:flex">
-                        <Link href={"/tr"}
-                              className={`text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary mr-2 rounded ${props.lang === 'tr' ? 'bg-schopiColor-primary text-white hover:text-white' : ''}`}>
-                            TR
-                        </Link>
-                        <Link href={"/en"}
-                              className={`text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary rounded ${props.lang === 'en' ? 'bg-schopiColor-primary text-white hover:text-white' : ''}`}>
-                            EN
-                        </Link>
+                    {/*Lang Dropdown*/}
+                    <div ref={langMenuRef} className="hidden lg:flex relative">
+                        <button
+                            type="button"
+                            onClick={() => setIsLangMenuOpen((prev) => !prev)}
+                            className="inline-flex items-center gap-2 text-xs text-slate-700 dark:text-gray-200 px-4 py-2 border border-schopiColor-primary/60 rounded-lg bg-white/70 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 transition-all duration-200">
+                            <span>{currentLangLabel}</span>
+                            <svg className="w-3.5 h-3.5 text-schopiColor-primary" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <div className={`absolute right-0 top-full mt-2 w-24 rounded-xl border border-black/5 dark:border-white/10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-[0_10px_24px_rgba(15,23,42,0.18)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.38)] p-1 transition-all duration-200 ${isLangMenuOpen ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-1 scale-95 pointer-events-none"}`}>
+                            {languageOptions.map((option) => (
+                                <Link
+                                    key={option.code}
+                                    href={`/${option.code}`}
+                                    onClick={() => setIsLangMenuOpen(false)}
+                                    className={`block text-center text-xs px-2 py-2 rounded-md transition-all duration-150 ${props.lang === option.code
+                                        ? "bg-schopiColor-primary text-white shadow-[0_6px_16px_rgba(248,75,24,0.3)]"
+                                        : "text-slate-600 dark:text-gray-300 hover:bg-schopiColor-primary/10 hover:text-schopiColor-primary"}`}>
+                                    {option.label}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
@@ -84,11 +156,16 @@ export default function Navbar(props: NavbarProps) {
                                 </svg>
                             </Disclosure.Button>
 
-                            <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
+                            <Disclosure.Panel className="flex flex-wrap w-full my-4 lg:hidden rounded-xl border border-black/5 dark:border-white/10 bg-white/75 dark:bg-black/25 p-3">
                                 <>
                                     {navigation.map((item, index) => (
                                         <Link key={index} href={item.href}
-                                              className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none">
+                                              onClick={() => setActiveHash(item.hash)}
+                                              className={`w-full px-4 py-2 -ml-4 rounded-md transition-all duration-200 focus:outline-none ${
+                                                  activeHash === item.hash
+                                                      ? "text-schopiColor-primary dark:text-orange-300 bg-schopiColor-primary/12 dark:bg-schopiColor-primary/15 shadow-[0_0_16px_rgba(248,75,24,0.22)]"
+                                                      : "text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary hover:bg-schopiColor-primary/5 dark:hover:bg-white/5 hover:translate-x-1 focus:text-schopiColor-primary focus:bg-indigo-100 dark:focus:bg-gray-800"
+                                              }`}>
                                             {item.name}
                                         </Link>
                                     ))}
@@ -101,11 +178,15 @@ export default function Navbar(props: NavbarProps) {
                                     {/*Language Buttons*/}
                                     <div className="w-full mt-3 flex justify-center">
                                         <Link href={"/tr"}
-                                              className={'text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary mr-2 rounded'}>
+                                              className={`text-xs p-2 border-2 border-schopiColor-primary mr-2 rounded transition-all duration-150 ${props.lang === "tr"
+                                                  ? "bg-schopiColor-primary text-white"
+                                                  : "text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"}`}>
                                             TR
                                         </Link>
                                         <Link href={"/en"}
-                                              className={'text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700 p-2 border-2 border-schopiColor-primary rounded'}>
+                                              className={`text-xs p-2 border-2 border-schopiColor-primary rounded transition-all duration-150 ${props.lang === "en"
+                                                  ? "bg-schopiColor-primary text-white"
+                                                  : "text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"}`}>
                                             EN
                                         </Link>
                                     </div>
@@ -121,8 +202,16 @@ export default function Navbar(props: NavbarProps) {
                         {navigation.map((menu, index) => (
                             <li className="mr-3 nav__item" key={index}>
                                 <Link href={menu.href}
-                                      className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
-                                    {menu.name}
+                                      onClick={() => setActiveHash(menu.hash)}
+                                      className={`inline-flex items-center gap-2 px-4 py-2 text-base font-normal no-underline rounded-md focus:outline-none transition-all duration-200 ${
+                                          activeHash === menu.hash
+                                              ? "text-schopiColor-primary dark:text-orange-300 bg-schopiColor-primary/10 dark:bg-schopiColor-primary/15 shadow-[0_0_18px_rgba(248,75,24,0.22)]"
+                                              : "text-slate-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(15,23,42,0.12)] dark:hover:shadow-[0_10px_20px_rgba(0,0,0,0.32)] focus:text-gray-900 dark:focus:text-white"
+                                      }`}>
+                                    <span>{menu.name}</span>
+                                    {activeHash === menu.hash && (
+                                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-schopiColor-primary to-orange-300 animate-spin" />
+                                    )}
                                 </Link>
                             </li>
                         ))}
@@ -130,6 +219,7 @@ export default function Navbar(props: NavbarProps) {
                 </div>
 
             </nav>
+            </div>
         </div>
     );
 }
