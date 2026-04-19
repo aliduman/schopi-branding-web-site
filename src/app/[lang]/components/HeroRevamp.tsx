@@ -168,7 +168,7 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
       <HeroBackground3D />
 
       {/* Subtle grid overlay on top of 3D */}
-      <div className="absolute inset-0 grid-pattern opacity-35 dark:opacity-20 pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="absolute inset-0 grid-pattern opacity-[0.07] dark:opacity-20 pointer-events-none" style={{ zIndex: 1 }} />
 
       <div className="relative z-10 container mx-auto px-6 xl:px-12 pt-24 pb-12">
         <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-6">

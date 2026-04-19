@@ -1,46 +1,43 @@
 "use client";
 import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
 
-const SHOPPING_ICONS = ["🛒", "🧺", "🍎", "🥛", "🥕", "🧀", "🍞", "🛍️", "✅", "💳", "🏷️", "🥦"];
-
-function makeIconTexture(emoji: string): THREE.Texture {
-  const size = 128;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d")!;
-  ctx.filter = "grayscale(1)";
-  ctx.font = `${Math.round(size * 0.6)}px serif`;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(emoji, size / 2, size / 2 + 4);
-  const tex = new THREE.CanvasTexture(canvas);
-  tex.needsUpdate = true;
-  return tex;
-}
+const PRODUCT_IMAGES = [
+  "/img/example_product_images/apple-green_wnzdmd.png",
+  "/img/example_product_images/chicken_hanw4h.png",
+  "/img/example_product_images/emmental_cpd8v2.png",
+  "/img/example_product_images/fig_dtmlln.png",
+  "/img/example_product_images/grape-black_cjksue.png",
+  "/img/example_product_images/ice-coffee_ihf8o9.png",
+  "/img/example_product_images/olive-oil_snwbwm.png",
+  "/img/example_product_images/pumpkin_v7uqqg.png",
+  "/img/example_product_images/raspberry_fskdeu.png",
+  "/img/example_product_images/turkish-tea_tepxlc.png",
+  "/img/example_product_images/peas_s34jmy.png",
+  "/img/example_product_images/plum_o4shce.png",
+];
 
 const Z_FAR = -12;
 const Z_NEAR = 2.5;
 
 /* ── Single floating icon sprite with depth (z-loop) ── */
 function FloatingIcon({
-  emoji,
+  imagePath,
   position,
   speed,
   zOffset,
   isDark,
 }: {
-  emoji: string;
+  imagePath: string;
   position: [number, number, number];
   speed: number;
   zOffset: number;
   isDark: boolean;
 }) {
   const ref = useRef<THREE.Sprite>(null!);
-  const texture = useMemo(() => makeIconTexture(emoji), [emoji]);
+  const texture = useLoader(THREE.TextureLoader, imagePath);
 
   // z goes from FAR → NEAR then wraps
   const range = Z_NEAR - Z_FAR;
@@ -56,11 +53,11 @@ function FloatingIcon({
     sp.scale.set(s, s, s);
 
     // Fade in early, fade out as it gets very close
-    const maxOpacity = isDark ? 0.55 : 0.38;
-    sp.material.opacity = t < 0.15
-      ? t / 0.15 * maxOpacity
-      : t > 0.82
-      ? (1 - (t - 0.82) / 0.18) * maxOpacity
+    const maxOpacity = isDark ? 0.65 : 0.9;
+    sp.material.opacity = t < 0.08
+      ? t / 0.08 * maxOpacity
+      : t > 0.85
+      ? (1 - (t - 0.85) / 0.15) * maxOpacity
       : maxOpacity;
   });
 
@@ -68,7 +65,7 @@ function FloatingIcon({
 
   return (
     <sprite ref={ref} position={[position[0], position[1], startZ]} scale={[0.18, 0.18, 0.18]}>
-      <spriteMaterial map={texture} color={isDark ? "#ffffff" : "#1f2937"} transparent opacity={0} depthWrite={false} />
+      <spriteMaterial map={texture} transparent opacity={0} depthWrite={false} />
     </sprite>
   );
 }
@@ -76,18 +73,18 @@ function FloatingIcon({
 /* ── Icon field ── */
 function IconField({ isDark }: { isDark: boolean }) {
   const icons = useMemo(() => {
-    return SHOPPING_ICONS.map((emoji, i) => {
-      const angle = (i / SHOPPING_ICONS.length) * Math.PI * 2;
+    return PRODUCT_IMAGES.map((imagePath, i) => {
+      const angle = (i / PRODUCT_IMAGES.length) * Math.PI * 2;
       const radius = 2.8 + (i % 3) * 1.4;
       return {
-        emoji,
+        imagePath,
         position: [
           Math.cos(angle) * radius,
           -1.6 + (i % 4) * 1.1,
           0,
         ] as [number, number, number],
         speed: 0.5 + (i % 4) * 0.15,
-        zOffset: i / SHOPPING_ICONS.length,
+        zOffset: i / PRODUCT_IMAGES.length,
       };
     });
   }, []);
