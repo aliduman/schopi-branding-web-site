@@ -300,7 +300,7 @@ export default function Navbar(props: NavbarProps) {
                                             onClick={() => setIsMobileMenuOpen(false)}
                                             className={`flex-1 text-center px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${props.lang === option.code
                                                 ? "bg-[#F84B18] text-white shadow-[0_4px_14px_rgba(248,75,24,0.3)]"
-                                                : "bg-slate-100 dark:bg-white/8 text-slate-600 dark:text-white/55 hover:bg-slate-200 dark:hover:bg-white/12"
+                                                : "bg-slate-100 dark:bg-white/15 text-slate-600 dark:text-white/80 hover:bg-slate-200 dark:hover:bg-white/22"
                                             }`}
                                         >
                                             {option.label}
