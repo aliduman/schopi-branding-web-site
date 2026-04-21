@@ -77,7 +77,7 @@ export default function VideoRevamp({ dict, videoId }: VideoRevampProps) {
                     {isComingSoon ? dict.videoSection.comingSoonButtonText : dict.videoSection.playButtonText}
                   </p>
                   {isComingSoon && (
-                    <p className="text-gray-400 dark:text-white/40 text-sm mt-1">Tanıtım videosu hazırlanıyor</p>
+                    <p className="text-gray-400 dark:text-white/40 text-sm mt-1">{dict.videoSection.preparingText}</p>
                   )}
                 </div>
               </div>

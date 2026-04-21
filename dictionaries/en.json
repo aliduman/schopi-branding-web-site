@@ -10,14 +10,31 @@
       "termsOfService": "Terms of Service",
       "cookiePolicy": "Cookie Policy"
     },
-    "cta": "Download the App"
+    "cta": "Download the App",
+    "closeMenu": "Close menu",
+    "comingSoon": "Coming Soon"
   },
   "heroSection": {
     "title": "Simplify Your Shopping Lists: Meet Schopi!",
+    "titleHighlight": "Simplify",
     "description": "You've never seen an app that makes creating and sharing lists this easy.",
     "badgeText": "Smart Grocery List",
     "appleStoreDownload": "Download from App Store",
-    "useWebApp": "Use Web App"
+    "useWebApp": "Use Web App",
+    "appStoreComingSoon": "Coming Soon on App Store!",
+    "socialProofText": "Thousands of happy users",
+    "featureTags": [
+      "⚡ Real-time sync",
+      "₺ Budget tracking",
+      "🌐 Web & iOS",
+      "🏷️ Category-based lists"
+    ],
+    "phoneBadge1Label": "Live Sharing",
+    "phoneBadge1Sub": "3 people editing",
+    "phoneBadge2Label": "Product Added!",
+    "phoneBadge2Sub": "White Bread • 0.5 ct",
+    "phoneBadge3Label": "List Reminder",
+    "phoneBadge3Sub": "Shopping time approaching"
   },
   "downloadApp": "Download App",
   "section1": {
@@ -28,6 +45,9 @@
   "optionsSection": {
     "title": "What Schopi App Offers You",
     "description": "Schopi offers ease of use and advantages that will take your shopping experience to the next level. You will benefit while shopping with Schopi.",
+    "badge1": "Less Time",
+    "badge2": "Stay Connected",
+    "badge3": "Everywhere",
     "features": {
       "feature1": {
         "title": "Less Time, More Organization:",
@@ -41,14 +61,40 @@
         "title": "Anytime, Anywhere:",
         "description": "Manage your shopping via mobile or web app."
       }
+    },
+    "demo": {
+      "liveShareNames": ["Ali", "Zeynep", "Mehmet"],
+      "liveShareActions": ["Added milk", "Checked bread", "Added eggs"],
+      "liveShareTimes": ["Just now", "1 min ago", "3 min ago"],
+      "liveShareActiveText": "3 people active",
+      "budgetTotalLabel": "Total spending",
+      "budgetCategories": ["Dairy", "Fruits & Vegetables", "Staples"],
+      "platformIosLabel": "iOS App",
+      "platformIosStatus": "On App Store",
+      "platformIosBadge": "Coming Soon",
+      "platformWebLabel": "Web App",
+      "platformWebStatus": "app.schopi.com",
+      "platformWebBadge": "Active",
+      "allDevicesSynced": "All devices synced"
     }
+  },
+  "statsSection": {
+    "features": [
+      { "label": "List Sharing", "status": "Active" },
+      { "label": "List Reminder", "status": "Active" },
+      { "label": "Voice Assistant", "status": "Coming Soon" },
+      { "label": "Budget Analysis", "status": "Coming Soon" },
+      { "label": "Nearby Store", "status": "Coming Soon" }
+    ],
+    "statusActive": "Active"
   },
   "videoSection": {
     "subtitle": "Watch a Video",
     "title": "Get to Know Our Product Better",
     "description": "Watch this video to better understand what awaits you while using Schopi.",
     "comingSoonButtonText": "Coming Soon",
-    "playButtonText": "Play"
+    "playButtonText": "Play",
+    "preparingText": "Promotional video being prepared"
   },
   "testimonalSection": {
     "subTitle": "Testimonials",
@@ -58,17 +104,29 @@
       "testimonial1": {
         "name": "Ayşe Demir",
         "job": "E-Commerce Specialist",
-        "comment": "<p class=\"text-2xl leading-normal \">Thanks to Schopi, I can quickly create my <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">shopping lists</mark>. We organized our shopping process perfectly with the suggestions of my team members.</p>"
+        "comment": "<p class=\"text-2xl leading-normal \">Thanks to Schopi, I can quickly create my <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">shopping lists</mark>. We organized our shopping process perfectly with the suggestions of my team members.</p>",
+        "commentPlain": "Thanks to Schopi, I can quickly create my shopping lists. We organized our shopping process perfectly with the suggestions of my team members.",
+        "highlight": "shopping lists"
       },
       "testimonial2": {
         "name": "Mehmet Yılmaz",
         "job": "Product Manager",
-        "comment": "<p class=\"text-2xl leading-normal \">Thanks to the compatibility of web and mobile applications, I can access my lists <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">anytime and anywhere</mark>. The user experience is really great!</p>"
+        "comment": "<p class=\"text-2xl leading-normal \">Thanks to the compatibility of web and mobile applications, I can access my lists <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">anytime and anywhere</mark>. The user experience is really great!</p>",
+        "commentPlain": "Thanks to the compatibility of web and mobile applications, I can access my lists anytime and anywhere. The user experience is really great!",
+        "highlight": "anytime and anywhere"
       },
       "testimonial3": {
         "name": "Zeynep Kaya",
         "job": "Housewife",
-        "comment": "<p class=\"text-2xl leading-normal \">Schopi helped me stay <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">organized</mark> with my family. We have never done our holiday shopping this easily. The sharing feature is great!</p>"
+        "comment": "<p class=\"text-2xl leading-normal \">Schopi helped me stay <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">organized</mark> with my family. We have never done our holiday shopping this easily. The sharing feature is great!</p>",
+        "commentPlain": "Schopi helped me stay organized with my family. We have never done our holiday shopping this easily. The sharing feature is great!",
+        "highlight": "organized with my family"
+      },
+      "testimonial4": {
+        "name": "Can Arslan",
+        "job": "Software Developer",
+        "commentPlain": "Thanks to the budget tracking feature, I reduced my monthly grocery expenses by 30%. No more surprises at the checkout.",
+        "highlight": "monthly grocery expenses"
       }
     }
   },
@@ -167,7 +225,9 @@
   "cta": {
     "title": "Download the app and start using it immediately.",
     "description": "Start your subscription at affordable prices.",
-    "appStoreDownload": "Download from App Store"
+    "appStoreDownload": "Download from App Store",
+    "appStoreComingSoon": "Coming Soon on App Store!",
+    "trustBadges": ["Secure & Encrypted", "Start for Free", "No Credit Card Required"]
   },
   "footer": {
     "description": "Benefit while shopping with Schopi. Manage both your time and money in the best way.",

@@ -51,7 +51,7 @@ function Blob({ className, style }: { className?: string; style?: React.CSSPrope
 }
 
 /* ─── Phone cluster ─── */
-function PhoneCluster() {
+function PhoneCluster({ dict }: { dict: any }) {
   return (
     <div className="relative flex items-end justify-center gap-3 lg:gap-5 flex-shrink-0 pb-10">
       {/* Orange glow behind center */}
@@ -80,8 +80,8 @@ function PhoneCluster() {
             </svg>
           </div>
           <div>
-            <p className="text-slate-900 dark:text-white text-[11px] font-semibold leading-tight">Anlık Paylaşım</p>
-            <p className="text-slate-500 dark:text-white/40 text-[9px] leading-tight">3 kişi düzenliyor</p>
+            <p className="text-slate-900 dark:text-white text-[11px] font-semibold leading-tight">{dict.heroSection.phoneBadge1Label}</p>
+            <p className="text-slate-500 dark:text-white/40 text-[9px] leading-tight">{dict.heroSection.phoneBadge1Sub}</p>
           </div>
         </div>
       </motion.div>
@@ -115,8 +115,8 @@ function PhoneCluster() {
             </svg>
           </div>
           <div>
-            <p className="text-slate-900 dark:text-white text-xs font-semibold leading-tight">Ürün Eklendi!</p>
-            <p className="text-slate-500 dark:text-white/40 text-[10px] leading-tight">White Bread • 0.5 ct</p>
+            <p className="text-slate-900 dark:text-white text-xs font-semibold leading-tight">{dict.heroSection.phoneBadge2Label}</p>
+            <p className="text-slate-500 dark:text-white/40 text-[10px] leading-tight">{dict.heroSection.phoneBadge2Sub}</p>
           </div>
         </div>
       </motion.div>
@@ -141,8 +141,8 @@ function PhoneCluster() {
             </svg>
           </div>
           <div>
-            <p className="text-slate-900 dark:text-white text-[11px] font-semibold leading-tight">Liste Hatırlatıcı</p>
-            <p className="text-slate-500 dark:text-white/40 text-[9px] leading-tight">Alışveriş zamanı yaklaşıyor</p>
+            <p className="text-slate-900 dark:text-white text-[11px] font-semibold leading-tight">{dict.heroSection.phoneBadge3Label}</p>
+            <p className="text-slate-500 dark:text-white/40 text-[9px] leading-tight">{dict.heroSection.phoneBadge3Sub}</p>
           </div>
         </div>
       </motion.div>
@@ -197,11 +197,11 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
               initial="hidden"
               animate="visible"
             >
-              Alışveriş Listelerinizi{" "}
+              {dict.heroSection.title.split(dict.heroSection.titleHighlight)[0]}
               <span className="text-[#F84B18]" style={{ textShadow: "0 0 40px rgba(248,75,24,0.4)" }}>
-                Kolaylaştırın
+                {dict.heroSection.titleHighlight}
               </span>
-              : Schopi ile Tanışın!
+              {dict.heroSection.title.split(dict.heroSection.titleHighlight)[1]}
             </motion.h1>
 
             <motion.p
@@ -210,7 +210,7 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
               initial="hidden"
               animate="visible"
             >
-              Liste oluşturmayı ve paylaşmayı hiç bu kadar kolay hale getiren bir uygulama görmediniz.
+              {dict.heroSection.description}
             </motion.p>
 
             {/* Feature tags */}
@@ -220,12 +220,7 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
               initial="hidden"
               animate="visible"
             >
-              {[
-                "⚡ Anlık senkronizasyon",
-                "₺ Bütçe takibi",
-                "🌐 Web & iOS",
-                "🏷️ Kategori bazlı liste",
-              ].map((tag) => (
+              {dict.heroSection.featureTags.map((tag: string) => (
                 <span
                   key={tag}
                   className="text-xs text-slate-600 dark:text-white/50 bg-white/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-1.5 rounded-full"
@@ -276,7 +271,7 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
                   {dict.heroSection.appleStoreDownload}
                 </button>
                 <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 dark:border-white/10 text-white/80 text-xs px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                  Yakında App Store'da!
+                  {dict.heroSection.appStoreComingSoon}
                 </span>
               </div>
             </motion.div>
@@ -323,7 +318,7 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
                     </svg>
                   ))}
                 </div>
-                <p className="text-slate-600 dark:text-white/40 text-xs">Binlerce mutlu kullanıcı</p>
+                <p className="text-slate-600 dark:text-white/40 text-xs">{dict.heroSection.socialProofText}</p>
               </div>
             </motion.div>
           </div>
@@ -335,7 +330,7 @@ export default function HeroRevamp({ dict, socialProofAvatars = [] }: HeroRevamp
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
           >
-            <PhoneCluster />
+            <PhoneCluster dict={dict} />
           </motion.div>
         </div>
       </div>

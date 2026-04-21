@@ -10,14 +10,31 @@
       "termsOfService": "Hizmet Şartları",
       "cookiePolicy": "Çerez Politikası"
     },
-    "cta": "Uygulamayı İndir"
+    "cta": "Uygulamayı İndir",
+    "closeMenu": "Menüyü kapat",
+    "comingSoon": "Yakında"
   },
   "heroSection": {
     "title": "Alışveriş Listelerinizi Kolaylaştırın: Schopi ile Tanışın!",
+    "titleHighlight": "Kolaylaştırın",
     "description": "Liste oluşturmayı ve paylaşmayı hiç bu kadar kolay hale getiren bir uygulama görmediniz.",
     "badgeText": "Akıllı Alışveriş Listesi",
     "appleStoreDownload": "App Store",
-    "useWebApp": "Web Uygulaması"
+    "useWebApp": "Web Uygulamasını Kullan",
+    "appStoreComingSoon": "Yakında App Store'da!",
+    "socialProofText": "Binlerce mutlu kullanıcı",
+    "featureTags": [
+      "⚡ Anlık senkronizasyon",
+      "₺ Bütçe takibi",
+      "🌐 Web & iOS",
+      "🏷️ Kategori bazlı liste"
+    ],
+    "phoneBadge1Label": "Anlık Paylaşım",
+    "phoneBadge1Sub": "3 kişi düzenliyor",
+    "phoneBadge2Label": "Ürün Eklendi!",
+    "phoneBadge2Sub": "White Bread • 0.5 ct",
+    "phoneBadge3Label": "Liste Hatırlatıcı",
+    "phoneBadge3Sub": "Alışveriş zamanı yaklaşıyor"
   },
   "downloadApp": "Uygulamayı İndir",
   "section1": {
@@ -28,6 +45,9 @@
   "optionsSection": {
     "title": "Schopi App size neler sunacak",
     "description": "Schopi, alışveriş deneyiminizi en üst seviyeye çıkaracak kullanım kolaylığını ve avantajlarını sunar. Schopi ile alışveriş yaparken kazançlı çıkacaksınız.",
+    "badge1": "Daha Az Zaman",
+    "badge2": "Bağlantıda Kalın",
+    "badge3": "Her Yerde",
     "features": {
       "feature1": {
         "title": "Daha Az Zaman, Daha Fazla Organize Olma:",
@@ -41,14 +61,40 @@
         "title": "Her Zaman ve Her Yerde:",
         "description": "İster mobil, ister web uygulaması üzerinden alışverişinizi yönetin."
       }
+    },
+    "demo": {
+      "liveShareNames": ["Ali", "Zeynep", "Mehmet"],
+      "liveShareActions": ["Süt ekledi", "Ekmek işaretledi", "Yumurta ekledi"],
+      "liveShareTimes": ["Az önce", "1 dk önce", "3 dk önce"],
+      "liveShareActiveText": "3 kişi aktif",
+      "budgetTotalLabel": "Toplam harcama",
+      "budgetCategories": ["Süt ürünleri", "Meyve & Sebze", "Temel gıda"],
+      "platformIosLabel": "iOS App",
+      "platformIosStatus": "App Store'da",
+      "platformIosBadge": "Yakında",
+      "platformWebLabel": "Web App",
+      "platformWebStatus": "app.schopi.com",
+      "platformWebBadge": "Aktif",
+      "allDevicesSynced": "Tüm cihazlar senkronize"
     }
+  },
+  "statsSection": {
+    "features": [
+      { "label": "Liste Paylaşımı", "status": "Aktif" },
+      { "label": "Liste Hatırlatıcı", "status": "Aktif" },
+      { "label": "Sesli Asistan", "status": "Yakında" },
+      { "label": "Bütçe Analizi", "status": "Yakında" },
+      { "label": "Yakın Market", "status": "Yakında" }
+    ],
+    "statusActive": "Aktif"
   },
   "videoSection": {
     "subtitle": "Bir video izleyin",
     "title": "Ürünümüzü daha yakından tanıyın",
     "description": "Schopi'yi kullanırken sizi neler beklediğini daha iyi anlamak için bu videoyu izleyin.",
     "comingSoonButtonText": "Yakında",
-    "playButtonText": "Oynat"
+    "playButtonText": "Oynat",
+    "preparingText": "Tanıtım videosu hazırlanıyor"
   },
   "testimonalSection": {
     "subTitle": "Görüşler",
@@ -58,17 +104,29 @@
       "testimonial1": {
         "name": "Ayşe Demir",
         "job": "E-Ticaret Uzmanı",
-        "comment": "<p class=\"text-2xl leading-normal \">Schopi sayesinde  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">alışveriş listelerimi</mark>  hızlıca oluşturabiliyorum. Ekip arkadaşlarımın önerileriyle alışveriş sürecimizi mükemmel bir şekilde organize ettik."
+        "comment": "<p class=\"text-2xl leading-normal \">Schopi sayesinde  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">alışveriş listelerimi</mark>  hızlıca oluşturabiliyorum. Ekip arkadaşlarımın önerileriyle alışveriş sürecimizi mükemmel bir şekilde organize ettik.",
+        "commentPlain": "Schopi sayesinde alışveriş listelerimi hızlıca oluşturabiliyorum. Ekip arkadaşlarımın önerileriyle alışveriş sürecimizi mükemmel bir şekilde organize ettik.",
+        "highlight": "alışveriş listelerimi"
       },
       "testimonial2": {
         "name": "Mehmet Yılmaz",
         "job": "Ürün Müdürü",
-        "comment": "<p class=\"text-2xl leading-normal \">Web ve mobil uygulamaların uyumu sayesinde,  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">her zaman ve her yerde</mark>  listelerime erişebiliyorum. Kullanıcı deneyimi gerçekten harika!</p>"
+        "comment": "<p class=\"text-2xl leading-normal \">Web ve mobil uygulamaların uyumu sayesinde,  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">her zaman ve her yerde</mark>  listelerime erişebiliyorum. Kullanıcı deneyimi gerçekten harika!</p>",
+        "commentPlain": "Web ve mobil uygulamaların uyumu sayesinde, her zaman ve her yerde listelerime erişebiliyorum. Kullanıcı deneyimi gerçekten harika!",
+        "highlight": "her zaman ve her yerde"
       },
       "testimonial3": {
         "name": "Zeynep Kaya",
         "job": "Ev Hanımı",
-        "comment": "<p class=\"text-2xl leading-normal \">Schopi, ailemle  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">organize</mark>  olmamı sağladı. Tatil alışverişlerimizi hiç bu kadar kolay yapmamıştık. Paylaşım özelliği harika!</p>"
+        "comment": "<p class=\"text-2xl leading-normal \">Schopi, ailemle  <mark class=\"text-schopiColor-primary bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200\">organize</mark>  olmamı sağladı. Tatil alışverişlerimizi hiç bu kadar kolay yapmamıştık. Paylaşım özelliği harika!</p>",
+        "commentPlain": "Schopi, ailemle organize olmamı sağladı. Tatil alışverişlerimizi hiç bu kadar kolay yapmamıştık. Paylaşım özelliği harika!",
+        "highlight": "organize olmamı"
+      },
+      "testimonial4": {
+        "name": "Can Arslan",
+        "job": "Yazılım Geliştirici",
+        "commentPlain": "Bütçe takip özelliği sayesinde aylık market harcamalarımı %30 azalttım. Artık kasada sürprizle karşılaşmıyorum.",
+        "highlight": "aylık market harcamalarımı"
       }
     }
   },
@@ -88,7 +146,7 @@
         "Reklamsız kullanım.",
         "Her bir liste için hatırlatıcı oluşturma.",
         "Listelerinizi dilediğiniz kadar kişi ile paylaşma",
-        "Schopi’ye eklenecek diğer özellikleri kullanma.",
+        "Schopi'ye eklenecek diğer özellikleri kullanma.",
         "Premium destek,"
       ]
     },
@@ -107,7 +165,7 @@
         "Reklamsız kullanım.",
         "Her bir liste için hatırlatıcı oluşturma.",
         "Listelerinizi dilediğiniz kadar kişi ile paylaşma",
-        "Schopi’ye eklenecek diğer özellikleri kullanma.",
+        "Schopi'ye eklenecek diğer özellikleri kullanma.",
         "Premium destek,"
       ]
     },
@@ -124,7 +182,7 @@
         "Reklamsız kullanım.",
         "Her bir liste için hatırlatıcı oluşturma.",
         "Listelerinizi dilediğiniz kadar kişi ile paylaşma",
-        "Schopi’ye eklenecek diğer özellikleri kullanma.",
+        "Schopi'ye eklenecek diğer özellikleri kullanma.",
         "Premium destek,"
       ]
     }
@@ -167,7 +225,9 @@
   "cta": {
     "title": "Uygulamayı indirin ve hemen kullanmaya başlayın.",
     "description": "Uygun fiyatlarla hemen aboneliğinizi başlatın.",
-    "appStoreDownload": "App Store"
+    "appStoreDownload": "App Store",
+    "appStoreComingSoon": "Yakında App Store'da!",
+    "trustBadges": ["Güvenli & Şifreli", "Ücretsiz Başla", "Kredi Kartı Gereksiz"]
   },
   "footer": {
     "description": "Schopi ile alışveriş yaparken kazançlı çıkın. Hem zamanınızı hem de paranızı en iyi şekilde yönetin.",

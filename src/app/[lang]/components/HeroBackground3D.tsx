@@ -45,7 +45,12 @@ function FloatingIcon({
   useFrame((_, delta) => {
     const sp = ref.current;
     sp.position.z += delta * speed * 1.8;
-    if (sp.position.z > Z_NEAR) sp.position.z = Z_FAR;
+    if (sp.position.z > Z_NEAR) {
+      sp.position.z = Z_FAR;
+      // Randomize x/y on each wrap so it never reappears at the same spot
+      sp.position.x = (Math.random() - 0.5) * 14;
+      sp.position.y = (Math.random() - 0.5) * 6;
+    }
 
     // Scale grows as it approaches camera (perspective illusion)
     const t = (sp.position.z - Z_FAR) / range; // 0 = far, 1 = near
@@ -73,17 +78,17 @@ function FloatingIcon({
 /* ── Icon field ── */
 function IconField({ isDark }: { isDark: boolean }) {
   const icons = useMemo(() => {
+    const xPositions = [-6.5, -5.0, -3.8, -2.4, -1.0, 0.8, 2.2, 3.6, 5.0, 6.4, -4.5, 4.0];
+    const yPositions = [2.4, -2.8, 1.2, -1.5, 2.8, -2.2, 0.6, -0.4, 2.0, -1.9, -0.8, 1.8];
     return PRODUCT_IMAGES.map((imagePath, i) => {
-      const angle = (i / PRODUCT_IMAGES.length) * Math.PI * 2;
-      const radius = 2.8 + (i % 3) * 1.4;
       return {
         imagePath,
         position: [
-          Math.cos(angle) * radius,
-          -1.6 + (i % 4) * 1.1,
+          xPositions[i],
+          yPositions[i],
           0,
         ] as [number, number, number],
-        speed: 0.5 + (i % 4) * 0.15,
+        speed: 0.45 + (i % 5) * 0.12,
         zOffset: i / PRODUCT_IMAGES.length,
       };
     });

@@ -19,7 +19,9 @@
       "Bash(sudo chown *)",
       "Bash(pkill -f \"next dev\")",
       "WebFetch(domain:www.schopi.com)",
-      "WebFetch(domain:schopi.com)"
+      "WebFetch(domain:schopi.com)",
+      "Bash(/usr/bin/grep -n 'Anlık\\\\|Bütçe\\\\|iOS\\\\|Kategori\\\\|Binlerce\\\\|mutlu\\\\|Kolaylaştırın\\\\|Liste\\\\|Schopi ile\\\\|Paylaşım\\\\|senkron\\\\|kişi\\\\|düzenliyor\\\\|Hatırlatıcı\\\\|zamanı\\\\|yaklaşıyor\\\\|Ürün Eklendi\\\\|White Bread\\\\|Yakında App\\\\|Web Uygulamasını\\\\|App Store'da')",
+      "Bash(/usr/bin/grep *)"
     ]
   }
 }

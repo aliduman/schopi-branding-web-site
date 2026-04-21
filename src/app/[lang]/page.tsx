@@ -30,7 +30,7 @@ export default async function RootRoute({ params }: { params: { lang: string } }
     return (
         <div className="bg-[#080808] min-h-screen">
             <HeroRevamp dict={dict} socialProofAvatars={heroAvatarUrls} />
-            <StatsSection />
+            <StatsSection dict={dict} />
             <FeaturesRevamp dict={dict} />
             <VideoRevamp dict={dict} videoId="fZ0D0cnR88E" />
             <TestimonialsRevamp dict={dict} avatarUrls={testimonialAvatarUrls} />

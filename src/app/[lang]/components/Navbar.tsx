@@ -1,8 +1,8 @@
 "use client";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
-import {Disclosure} from "@headlessui/react";
+import { motion, AnimatePresence } from "framer-motion";
 import Dictionary from "@/app/[lang]/dictionary";
 
 interface NavbarProps {
@@ -15,24 +15,24 @@ export default function Navbar(props: NavbarProps) {
     const langParam = props.lang;
     const [activeHash, setActiveHash] = useState("#features");
     const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const langMenuRef = useRef<HTMLDivElement | null>(null);
     const currentLangLabel = props.lang === "en" ? "EN" : "TR";
     const languageOptions = [
-        {code: "tr", label: "TR"},
-        {code: "en", label: "EN"},
+        { code: "tr", label: "TR" },
+        { code: "en", label: "EN" },
     ];
     const navigation = [
-        {name: props.dict.header.menu.product, href: baseUrl + langParam + "#features", hash: "#features"},
-        {name: props.dict.header.menu.pricing, href: baseUrl + langParam + "#pricing", hash: "#pricing"},
-        {name: props.dict.header.menu.faq, href: baseUrl + langParam + "#faq", hash: "#faq"},
+        { name: props.dict.header.menu.product, href: baseUrl + langParam + "#features", hash: "#features" },
+        { name: props.dict.header.menu.pricing, href: baseUrl + langParam + "#pricing", hash: "#pricing" },
+        { name: props.dict.header.menu.faq, href: baseUrl + langParam + "#faq", hash: "#faq" },
     ];
 
+    /* ── Active hash tracking ── */
     useEffect(() => {
         const updateActiveFromHash = () => {
             const hash = window.location.hash;
-            if (hash) {
-                setActiveHash(hash);
-            }
+            if (hash) setActiveHash(hash);
         };
 
         updateActiveFromHash();
@@ -47,22 +47,21 @@ export default function Navbar(props: NavbarProps) {
                 const visibleEntry = entries
                     .filter((entry) => entry.isIntersecting)
                     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
                 if (visibleEntry?.target?.id) {
                     setActiveHash(`#${visibleEntry.target.id}`);
                 }
             },
-            {threshold: 0.35}
+            { threshold: 0.35 }
         );
 
         sections.forEach((section) => observer.observe(section));
-
         return () => {
             window.removeEventListener("hashchange", updateActiveFromHash);
             observer.disconnect();
         };
     }, []);
 
+    /* ── Lang dropdown outside click ── */
     useEffect(() => {
         const handleOutsideClick = (event: MouseEvent) => {
             if (!langMenuRef.current) return;
@@ -70,209 +69,287 @@ export default function Navbar(props: NavbarProps) {
                 setIsLangMenuOpen(false);
             }
         };
-
         document.addEventListener("mousedown", handleOutsideClick);
         return () => document.removeEventListener("mousedown", handleOutsideClick);
     }, []);
 
+    /* ── Body scroll lock when mobile menu open ── */
+    useEffect(() => {
+        document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
+    }, [isMobileMenuOpen]);
+
+    /* ── Close mobile menu on Escape ── */
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setIsMobileMenuOpen(false);
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
     return (
-        <div className="fixed top-3 inset-x-0 z-50 px-3 md:px-6">
-            <div className="mx-auto max-w-7xl rounded-2xl border border-white/60 dark:border-white/15 bg-gradient-to-r from-white/75 via-white/65 to-orange-50/55 dark:from-gray-950/80 dark:via-gray-900/75 dark:to-gray-950/80 shadow-[0_10px_40px_rgba(2,6,23,0.12)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.45)]" style={{ backdropFilter: "blur(20px)" }}>
-            <nav
-                className="relative flex flex-wrap items-center justify-between px-4 py-3 mx-auto lg:justify-between sm:px-6 xl:px-8">
-                {/* Logo  */}
-                <Link href="/">
-                  <span
-                      className="flex items-center space-x-2 text-2xl font-medium text-schopiColor-primary dark:text-gray-100">
-                      <span>
-                          <Logo/>
-                      </span>
-                  </span>
-                </Link>
+        <>
+            <div className="fixed top-3 inset-x-0 z-50 px-3 md:px-6">
+                <div className="mx-auto max-w-7xl rounded-2xl border border-white/60 dark:border-white/15 bg-gradient-to-r from-white/75 via-white/65 to-orange-50/55 dark:from-gray-950/80 dark:via-gray-900/75 dark:to-gray-950/80 shadow-[0_10px_40px_rgba(2,6,23,0.12)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.45)]" style={{ backdropFilter: "blur(20px)" }}>
+                    <nav className="relative flex flex-wrap items-center justify-between px-4 py-3 mx-auto lg:justify-between sm:px-6 xl:px-8">
 
-                {/* get started  */}
-                <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
-                    <ThemeChanger/>
-                    <div className="hidden mr-3 lg:flex nav__item">
-                        <Tooltip message={"Yakında"}>
-                            <Link href="/"
-                                  className="px-5 py-2.5 text-white bg-gradient-to-r from-schopiColor-primary to-orange-400 rounded-xl md:ml-5 flex shadow-[0_8px_24px_rgba(248,75,24,0.28)] hover:-translate-y-0.5 transition-all duration-200"
-                                  data-tooltip-target="tooltip-default">
-                                <span className={"mr-2"}><AppleLogo/></span> {props.dict.header.cta}
-                            </Link>
-                        </Tooltip>
-                    </div>
-                    {/*Lang Dropdown*/}
-                    <div ref={langMenuRef} className="hidden lg:flex relative">
-                        <button
-                            type="button"
-                            onClick={() => setIsLangMenuOpen((prev) => !prev)}
-                            className="inline-flex items-center gap-2 text-xs text-slate-700 dark:text-gray-200 px-4 py-2 border border-schopiColor-primary/60 rounded-lg bg-white/70 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 transition-all duration-200">
-                            <span>{currentLangLabel}</span>
-                            <svg className="w-3.5 h-3.5 text-schopiColor-primary" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-                            </svg>
-                        </button>
+                        {/* ── Logo ── */}
+                        <Link href="/">
+                            <span className="flex items-center space-x-2 text-2xl font-medium text-schopiColor-primary dark:text-gray-100">
+                                <span><Logo /></span>
+                            </span>
+                        </Link>
 
-                        <div className={`absolute right-0 top-full mt-2 w-24 rounded-xl border border-black/5 dark:border-white/10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-[0_10px_24px_rgba(15,23,42,0.18)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.38)] p-1 transition-all duration-200 ${isLangMenuOpen ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-1 scale-95 pointer-events-none"}`}>
-                            {languageOptions.map((option) => (
-                                <Link
-                                    key={option.code}
-                                    href={`/${option.code}`}
-                                    onClick={() => setIsLangMenuOpen(false)}
-                                    className={`block text-center text-xs px-2 py-2 rounded-md transition-all duration-150 ${props.lang === option.code
-                                        ? "bg-schopiColor-primary text-white shadow-[0_6px_16px_rgba(248,75,24,0.3)]"
-                                        : "text-slate-600 dark:text-gray-300 hover:bg-schopiColor-primary/10 hover:text-schopiColor-primary"}`}>
-                                    {option.label}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                        {/* ── Right controls: theme + CTA + lang + hamburger ── */}
+                        <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2 flex items-center">
+                            <ThemeChanger />
 
-                <Disclosure>
-                    {({open}) => (
-                        <>
-                            <Disclosure.Button
-                                aria-label="Toggle Menu"
-                                className="px-2 py-1 text-gray-500 rounded-md lg:hidden hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700">
-                                <svg
-                                    className="w-6 h-6 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    {open && (
-                                        <path
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                            d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-                                        />
-                                    )}
-                                    {!open && (
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                                        />
-                                    )}
-                                </svg>
-                            </Disclosure.Button>
-
-                            <Disclosure.Panel className="flex flex-wrap w-full my-4 lg:hidden rounded-xl border border-black/5 dark:border-white/10 bg-white/75 dark:bg-black/25 p-3">
-                                <>
-                                    {navigation.map((item, index) => (
-                                        <Link key={index} href={item.href}
-                                              onClick={() => setActiveHash(item.hash)}
-                                              className={`w-full px-4 py-2 -ml-4 rounded-md transition-all duration-200 focus:outline-none ${
-                                                  activeHash === item.hash
-                                                      ? "text-schopiColor-primary dark:text-orange-300 bg-schopiColor-primary/12 dark:bg-schopiColor-primary/15 shadow-[0_0_16px_rgba(248,75,24,0.22)]"
-                                                      : "text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary hover:bg-schopiColor-primary/5 dark:hover:bg-white/5 hover:translate-x-1 focus:text-schopiColor-primary focus:bg-indigo-100 dark:focus:bg-gray-800"
-                                              }`}>
-                                            {item.name}
-                                        </Link>
-                                    ))}
-                                    <Link href="/"
-                                          className="w-full px-6 py-2 mt-3 text-center text-white bg-schopiColor-primary rounded-md lg:ml-5 flex items-center justify-center">
-                                        <AppleLogo/>
+                            {/* Desktop CTA */}
+                            <div className="hidden mr-3 lg:flex nav__item">
+                                <Tooltip message={props.dict.header.comingSoon}>
+                                    <Link
+                                        href="/"
+                                        className="px-5 py-2.5 text-white bg-gradient-to-r from-schopiColor-primary to-orange-400 rounded-xl md:ml-5 flex shadow-[0_8px_24px_rgba(248,75,24,0.28)] hover:-translate-y-0.5 transition-all duration-200"
+                                    >
+                                        <span className="mr-2"><AppleLogo /></span>
                                         {props.dict.header.cta}
                                     </Link>
+                                </Tooltip>
+                            </div>
 
-                                    {/*Language Buttons*/}
-                                    <div className="w-full mt-3 flex justify-center">
-                                        <Link href={"/tr"}
-                                              className={`text-xs p-2 border-2 border-schopiColor-primary mr-2 rounded transition-all duration-150 ${props.lang === "tr"
-                                                  ? "bg-schopiColor-primary text-white"
-                                                  : "text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"}`}>
-                                            TR
+                            {/* Desktop lang dropdown */}
+                            <div ref={langMenuRef} className="hidden lg:flex relative">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsLangMenuOpen((prev) => !prev)}
+                                    className="inline-flex items-center gap-2 text-xs text-slate-700 dark:text-gray-200 px-4 py-2 border border-schopiColor-primary/60 rounded-lg bg-white/70 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                                >
+                                    <span>{currentLangLabel}</span>
+                                    <svg className="w-3.5 h-3.5 text-schopiColor-primary" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div className={`absolute right-0 top-full mt-2 w-24 rounded-xl border border-black/5 dark:border-white/10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-[0_10px_24px_rgba(15,23,42,0.18)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.38)] p-1 transition-all duration-200 ${isLangMenuOpen ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-1 scale-95 pointer-events-none"}`}>
+                                    {languageOptions.map((option) => (
+                                        <Link
+                                            key={option.code}
+                                            href={`/${option.code}`}
+                                            onClick={() => setIsLangMenuOpen(false)}
+                                            className={`block text-center text-xs px-2 py-2 rounded-md transition-all duration-150 ${props.lang === option.code
+                                                ? "bg-schopiColor-primary text-white shadow-[0_6px_16px_rgba(248,75,24,0.3)]"
+                                                : "text-slate-600 dark:text-gray-300 hover:bg-schopiColor-primary/10 hover:text-schopiColor-primary"}`}
+                                        >
+                                            {option.label}
                                         </Link>
-                                        <Link href={"/en"}
-                                              className={`text-xs p-2 border-2 border-schopiColor-primary rounded transition-all duration-150 ${props.lang === "en"
-                                                  ? "bg-schopiColor-primary text-white"
-                                                  : "text-gray-500 dark:text-gray-300 hover:text-schopiColor-primary focus:text-schopiColor-primary focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"}`}>
-                                            EN
-                                        </Link>
-                                    </div>
-                                </>
-                            </Disclosure.Panel>
-                        </>
-                    )}
-                </Disclosure>
+                                    ))}
+                                </div>
+                            </div>
 
-                {/* menu  */}
-                <div className="hidden text-center lg:flex lg:items-center">
-                    <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
-                        {navigation.map((menu, index) => (
-                            <li className="mr-3 nav__item" key={index}>
-                                <Link href={menu.href}
-                                      onClick={() => setActiveHash(menu.hash)}
-                                      className={`inline-flex items-center gap-2 px-4 py-2 text-base font-normal no-underline rounded-md focus:outline-none transition-all duration-200 ${
-                                          activeHash === menu.hash
-                                              ? "text-schopiColor-primary dark:text-orange-300 bg-schopiColor-primary/10 dark:bg-schopiColor-primary/15 shadow-[0_0_18px_rgba(248,75,24,0.22)]"
-                                              : "text-slate-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(15,23,42,0.12)] dark:hover:shadow-[0_10px_20px_rgba(0,0,0,0.32)] focus:text-gray-900 dark:focus:text-white"
-                                      }`}>
-                                    <span>{menu.name}</span>
-                                    {activeHash === menu.hash && (
-                                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-schopiColor-primary to-orange-300 animate-spin" />
-                                    )}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                            {/* ── Animated hamburger button ── */}
+                            <button
+                                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                                className="w-10 h-10 flex flex-col items-center justify-center gap-[5px] lg:hidden rounded-xl text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                                aria-label="Toggle Menu"
+                                aria-expanded={isMobileMenuOpen}
+                            >
+                                <motion.span
+                                    animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                                    className="block w-5 h-[2px] bg-current rounded-full"
+                                />
+                                <motion.span
+                                    animate={isMobileMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                                    transition={{ duration: 0.18, ease: "easeInOut" }}
+                                    className="block w-5 h-[2px] bg-current rounded-full"
+                                />
+                                <motion.span
+                                    animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                                    className="block w-5 h-[2px] bg-current rounded-full"
+                                />
+                            </button>
+                        </div>
+
+                        {/* ── Desktop nav links ── */}
+                        <div className="hidden text-center lg:flex lg:items-center">
+                            <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
+                                {navigation.map((menu, index) => (
+                                    <li className="mr-3 nav__item" key={index}>
+                                        <Link
+                                            href={menu.href}
+                                            onClick={() => setActiveHash(menu.hash)}
+                                            className={`inline-flex items-center gap-2 px-4 py-2 text-base font-normal no-underline rounded-md focus:outline-none transition-all duration-200 ${activeHash === menu.hash
+                                                ? "text-schopiColor-primary dark:text-orange-300 bg-schopiColor-primary/10 dark:bg-schopiColor-primary/15 shadow-[0_0_18px_rgba(248,75,24,0.22)]"
+                                                : "text-slate-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(15,23,42,0.12)] dark:hover:shadow-[0_10px_20px_rgba(0,0,0,0.32)] focus:text-gray-900 dark:focus:text-white"
+                                            }`}
+                                        >
+                                            <span>{menu.name}</span>
+                                            {activeHash === menu.hash && (
+                                                <span className="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-schopiColor-primary to-orange-300 animate-spin" />
+                                            )}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                    </nav>
                 </div>
-
-            </nav>
             </div>
-        </div>
+
+            {/* ── Full-screen mobile menu overlay ── */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            key="backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="fixed inset-0 z-[55] bg-black/50 backdrop-blur-sm lg:hidden"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        />
+
+                        {/* Slide-down panel */}
+                        <motion.div
+                            key="panel"
+                            initial={{ y: "-100%", opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: "-100%", opacity: 0 }}
+                            transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
+                            className="fixed top-0 left-0 right-0 z-[60] lg:hidden bg-white dark:bg-[#080808]/95 border-b border-slate-200 dark:border-white/10 px-6 pt-5 pb-8 shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+                        >
+                            {/* Top row: logo + close */}
+                            <div className="flex items-center justify-between mb-8">
+                                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Logo />
+                                </Link>
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-white/60 hover:bg-slate-200 dark:hover:bg-white/15 transition-colors cursor-pointer"
+                                    aria-label={props.dict.header.closeMenu}
+                                >
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {/* Nav items — staggered */}
+                            <nav className="space-y-1 mb-8">
+                                {navigation.map((item, i) => (
+                                    <motion.div
+                                        key={item.hash}
+                                        initial={{ opacity: 0, x: -16 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.08 + i * 0.06, duration: 0.28, ease: "easeOut" }}
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            onClick={() => { setActiveHash(item.hash); setIsMobileMenuOpen(false); }}
+                                            className={`flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all duration-200 cursor-pointer ${activeHash === item.hash
+                                                ? "text-[#F84B18] bg-[#F84B18]/10 shadow-[inset_0_0_0_1px_rgba(248,75,24,0.2)]"
+                                                : "text-slate-700 dark:text-white/75 hover:text-[#F84B18] hover:bg-[#F84B18]/6 dark:hover:bg-white/5"
+                                            }`}
+                                        >
+                                            {activeHash === item.hash && (
+                                                <span className="w-2 h-2 rounded-full bg-[#F84B18] flex-shrink-0" />
+                                            )}
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </nav>
+
+                            {/* Divider */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.26 }}
+                                className="h-px bg-slate-200 dark:bg-white/8 mb-6"
+                            />
+
+                            {/* CTA + language */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.28, duration: 0.3, ease: "easeOut" }}
+                                className="space-y-3"
+                            >
+                                <a
+                                    href="https://app.schopi.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="flex items-center justify-center gap-2.5 w-full px-6 py-3.5 bg-[#F84B18] text-white rounded-xl font-semibold text-[15px] shadow-[0_8px_28px_rgba(248,75,24,0.38)] hover:shadow-[0_12px_36px_rgba(248,75,24,0.5)] hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+                                >
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    {props.dict.heroSection.useWebApp}
+                                </a>
+
+                                <div className="flex justify-center gap-2">
+                                    {languageOptions.map((option) => (
+                                        <Link
+                                            key={option.code}
+                                            href={`/${option.code}`}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className={`flex-1 text-center px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${props.lang === option.code
+                                                ? "bg-[#F84B18] text-white shadow-[0_4px_14px_rgba(248,75,24,0.3)]"
+                                                : "bg-slate-100 dark:bg-white/8 text-slate-600 dark:text-white/55 hover:bg-slate-200 dark:hover:bg-white/12"
+                                            }`}
+                                        >
+                                            {option.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+        </>
     );
 }
 
 function Logo() {
     return (
         <svg width="232" height="45" viewBox="0 0 232 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M11.4778 36.216C9.60578 36.216 7.80578 35.916 6.07778 35.316C4.37378 34.716 3.05378 33.924 2.11778 32.94L3.16178 30.888C4.07378 31.8 5.28578 32.544 6.79778 33.12C8.30978 33.672 9.86978 33.948 11.4778 33.948C13.7338 33.948 15.4258 33.54 16.5538 32.724C17.6818 31.884 18.2458 30.804 18.2458 29.484C18.2458 28.476 17.9338 27.672 17.3098 27.072C16.7098 26.472 15.9658 26.016 15.0778 25.704C14.1898 25.368 12.9538 25.008 11.3698 24.624C9.47378 24.144 7.96178 23.688 6.83378 23.256C5.70578 22.8 4.73378 22.116 3.91778 21.204C3.12578 20.292 2.72978 19.056 2.72978 17.496C2.72978 16.224 3.06578 15.072 3.73778 14.04C4.40978 12.984 5.44178 12.144 6.83378 11.52C8.22578 10.896 9.95378 10.584 12.0178 10.584C13.4578 10.584 14.8618 10.788 16.2298 11.196C17.6218 11.58 18.8218 12.12 19.8298 12.816L18.9298 14.94C17.8738 14.244 16.7458 13.728 15.5458 13.392C14.3458 13.032 13.1698 12.852 12.0178 12.852C9.80978 12.852 8.14178 13.284 7.01378 14.148C5.90978 14.988 5.35778 16.08 5.35778 17.424C5.35778 18.432 5.65778 19.248 6.25778 19.872C6.88178 20.472 7.64978 20.94 8.56178 21.276C9.49778 21.588 10.7458 21.936 12.3058 22.32C14.1538 22.776 15.6418 23.232 16.7698 23.688C17.9218 24.12 18.8938 24.792 19.6858 25.704C20.4778 26.592 20.8738 27.804 20.8738 29.34C20.8738 30.612 20.5258 31.776 19.8298 32.832C19.1578 33.864 18.1138 34.692 16.6978 35.316C15.2818 35.916 13.5418 36.216 11.4778 36.216Z"
-                fill="#626263"/>
-            <path
-                d="M55.1105 35.216C52.6145 35.216 50.3585 34.664 48.3425 33.56C46.3505 32.456 44.7785 30.932 43.6265 28.988C42.4985 27.02 41.9345 24.824 41.9345 22.4C41.9345 19.976 42.4985 17.792 43.6265 15.848C44.7785 13.88 46.3625 12.344 48.3785 11.24C50.3945 10.136 52.6505 9.584 55.1465 9.584C57.0185 9.584 58.7465 9.896 60.3305 10.52C61.9145 11.144 63.2585 12.056 64.3625 13.256L62.6705 14.948C60.7025 12.956 58.2185 11.96 55.2185 11.96C53.2265 11.96 51.4145 12.416 49.7825 13.328C48.1505 14.24 46.8665 15.488 45.9305 17.072C45.0185 18.656 44.5625 20.432 44.5625 22.4C44.5625 24.368 45.0185 26.144 45.9305 27.728C46.8665 29.312 48.1505 30.56 49.7825 31.472C51.4145 32.384 53.2265 32.84 55.2185 32.84C58.2425 32.84 60.7265 31.832 62.6705 29.816L64.3625 31.508C63.2585 32.708 61.9025 33.632 60.2945 34.28C58.7105 34.904 56.9825 35.216 55.1105 35.216Z"
-                fill="#626263"/>
-            <path d="M108.521 10.8V36H105.893V24.372H90.1254V36H87.4614V10.8H90.1254V22.032H105.893V10.8H108.521Z"
-                  fill="#626263"/>
-            <path
-                d="M145.52 36.216C143.024 36.216 140.756 35.664 138.716 34.56C136.7 33.432 135.116 31.896 133.964 29.952C132.836 28.008 132.272 25.824 132.272 23.4C132.272 20.976 132.836 18.792 133.964 16.848C135.116 14.904 136.7 13.38 138.716 12.276C140.756 11.148 143.024 10.584 145.52 10.584C148.016 10.584 150.26 11.136 152.252 12.24C154.268 13.344 155.852 14.88 157.004 16.848C158.156 18.792 158.732 20.976 158.732 23.4C158.732 25.824 158.156 28.02 157.004 29.988C155.852 31.932 154.268 33.456 152.252 34.56C150.26 35.664 148.016 36.216 145.52 36.216ZM145.52 33.84C147.512 33.84 149.312 33.396 150.92 32.508C152.528 31.596 153.788 30.348 154.7 28.764C155.612 27.156 156.068 25.368 156.068 23.4C156.068 21.432 155.612 19.656 154.7 18.072C153.788 16.464 152.528 15.216 150.92 14.328C149.312 13.416 147.512 12.96 145.52 12.96C143.528 12.96 141.716 13.416 140.084 14.328C138.476 15.216 137.204 16.464 136.268 18.072C135.356 19.656 134.9 21.432 134.9 23.4C134.9 25.368 135.356 27.156 136.268 28.764C137.204 30.348 138.476 31.596 140.084 32.508C141.716 33.396 143.528 33.84 145.52 33.84Z"
-                fill="#626263"/>
-            <path
-                d="M191.616 10.8C194.832 10.8 197.352 11.568 199.176 13.104C201 14.64 201.912 16.752 201.912 19.44C201.912 22.128 201 24.24 199.176 25.776C197.352 27.288 194.832 28.044 191.616 28.044H184.848V36H182.184V10.8H191.616ZM191.544 25.704C194.04 25.704 195.948 25.164 197.268 24.084C198.588 22.98 199.248 21.432 199.248 19.44C199.248 17.4 198.588 15.84 197.268 14.76C195.948 13.656 194.04 13.104 191.544 13.104H184.848V25.704H191.544Z"
-                fill="#626263"/>
+            <path d="M11.4778 36.216C9.60578 36.216 7.80578 35.916 6.07778 35.316C4.37378 34.716 3.05378 33.924 2.11778 32.94L3.16178 30.888C4.07378 31.8 5.28578 32.544 6.79778 33.12C8.30978 33.672 9.86978 33.948 11.4778 33.948C13.7338 33.948 15.4258 33.54 16.5538 32.724C17.6818 31.884 18.2458 30.804 18.2458 29.484C18.2458 28.476 17.9338 27.672 17.3098 27.072C16.7098 26.472 15.9658 26.016 15.0778 25.704C14.1898 25.368 12.9538 25.008 11.3698 24.624C9.47378 24.144 7.96178 23.688 6.83378 23.256C5.70578 22.8 4.73378 22.116 3.91778 21.204C3.12578 20.292 2.72978 19.056 2.72978 17.496C2.72978 16.224 3.06578 15.072 3.73778 14.04C4.40978 12.984 5.44178 12.144 6.83378 11.52C8.22578 10.896 9.95378 10.584 12.0178 10.584C13.4578 10.584 14.8618 10.788 16.2298 11.196C17.6218 11.58 18.8218 12.12 19.8298 12.816L18.9298 14.94C17.8738 14.244 16.7458 13.728 15.5458 13.392C14.3458 13.032 13.1698 12.852 12.0178 12.852C9.80978 12.852 8.14178 13.284 7.01378 14.148C5.90978 14.988 5.35778 16.08 5.35778 17.424C5.35778 18.432 5.65778 19.248 6.25778 19.872C6.88178 20.472 7.64978 20.94 8.56178 21.276C9.49778 21.588 10.7458 21.936 12.3058 22.32C14.1538 22.776 15.6418 23.232 16.7698 23.688C17.9218 24.12 18.8938 24.792 19.6858 25.704C20.4778 26.592 20.8738 27.804 20.8738 29.34C20.8738 30.612 20.5258 31.776 19.8298 32.832C19.1578 33.864 18.1138 34.692 16.6978 35.316C15.2818 35.916 13.5418 36.216 11.4778 36.216Z" fill="#626263"/>
+            <path d="M55.1105 35.216C52.6145 35.216 50.3585 34.664 48.3425 33.56C46.3505 32.456 44.7785 30.932 43.6265 28.988C42.4985 27.02 41.9345 24.824 41.9345 22.4C41.9345 19.976 42.4985 17.792 43.6265 15.848C44.7785 13.88 46.3625 12.344 48.3785 11.24C50.3945 10.136 52.6505 9.584 55.1465 9.584C57.0185 9.584 58.7465 9.896 60.3305 10.52C61.9145 11.144 63.2585 12.056 64.3625 13.256L62.6705 14.948C60.7025 12.956 58.2185 11.96 55.2185 11.96C53.2265 11.96 51.4145 12.416 49.7825 13.328C48.1505 14.24 46.8665 15.488 45.9305 17.072C45.0185 18.656 44.5625 20.432 44.5625 22.4C44.5625 24.368 45.0185 26.144 45.9305 27.728C46.8665 29.312 48.1505 30.56 49.7825 31.472C51.4145 32.384 53.2265 32.84 55.2185 32.84C58.2425 32.84 60.7265 31.832 62.6705 29.816L64.3625 31.508C63.2585 32.708 61.9025 33.632 60.2945 34.28C58.7105 34.904 56.9825 35.216 55.1105 35.216Z" fill="#626263"/>
+            <path d="M108.521 10.8V36H105.893V24.372H90.1254V36H87.4614V10.8H90.1254V22.032H105.893V10.8H108.521Z" fill="#626263"/>
+            <path d="M145.52 36.216C143.024 36.216 140.756 35.664 138.716 34.56C136.7 33.432 135.116 31.896 133.964 29.952C132.836 28.008 132.272 25.824 132.272 23.4C132.272 20.976 132.836 18.792 133.964 16.848C135.116 14.904 136.7 13.38 138.716 12.276C140.756 11.148 143.024 10.584 145.52 10.584C148.016 10.584 150.26 11.136 152.252 12.24C154.268 13.344 155.852 14.88 157.004 16.848C158.156 18.792 158.732 20.976 158.732 23.4C158.732 25.824 158.156 28.02 157.004 29.988C155.852 31.932 154.268 33.456 152.252 34.56C150.26 35.664 148.016 36.216 145.52 36.216ZM145.52 33.84C147.512 33.84 149.312 33.396 150.92 32.508C152.528 31.596 153.788 30.348 154.7 28.764C155.612 27.156 156.068 25.368 156.068 23.4C156.068 21.432 155.612 19.656 154.7 18.072C153.788 16.464 152.528 15.216 150.92 14.328C149.312 13.416 147.512 12.96 145.52 12.96C143.528 12.96 141.716 13.416 140.084 14.328C138.476 15.216 137.204 16.464 136.268 18.072C135.356 19.656 134.9 21.432 134.9 23.4C134.9 25.368 135.356 27.156 136.268 28.764C137.204 30.348 138.476 31.596 140.084 32.508C141.716 33.396 143.528 33.84 145.52 33.84Z" fill="#626263"/>
+            <path d="M191.616 10.8C194.832 10.8 197.352 11.568 199.176 13.104C201 14.64 201.912 16.752 201.912 19.44C201.912 22.128 201 24.24 199.176 25.776C197.352 27.288 194.832 28.044 191.616 28.044H184.848V36H182.184V10.8H191.616ZM191.544 25.704C194.04 25.704 195.948 25.164 197.268 24.084C198.588 22.98 199.248 21.432 199.248 19.44C199.248 17.4 198.588 15.84 197.268 14.76C195.948 13.656 194.04 13.104 191.544 13.104H184.848V25.704H191.544Z" fill="#626263"/>
             <path d="M225.172 9.8H227.836V35H225.172V9.8Z" fill="#626263"/>
         </svg>
-
     );
 }
 
 function AppleLogo() {
     return (
-        <svg width={20} fill={'#fff'} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-             className={'mr-2'}>
-            <defs></defs>
+        <svg width={20} fill={"#fff"} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" className="mr-2">
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Dribbble-Light-Preview" transform="translate(-102.000000, -7439.000000)" fill="#ffffff">
                     <g id="icons" transform="translate(56.000000, 160.000000)">
-                        <path
-                            d="M57.5708873,7282.19296 C58.2999598,7281.34797 58.7914012,7280.17098 58.6569121,7279 C57.6062792,7279.04 56.3352055,7279.67099 55.5818643,7280.51498 C54.905374,7281.26397 54.3148354,7282.46095 54.4735932,7283.60894 C55.6455696,7283.69593 56.8418148,7283.03894 57.5708873,7282.19296 M60.1989864,7289.62485 C60.2283111,7292.65181 62.9696641,7293.65879 63,7293.67179 C62.9777537,7293.74279 62.562152,7295.10677 61.5560117,7296.51675 C60.6853718,7297.73474 59.7823735,7298.94772 58.3596204,7298.97372 C56.9621472,7298.99872 56.5121648,7298.17973 54.9134635,7298.17973 C53.3157735,7298.17973 52.8162425,7298.94772 51.4935978,7298.99872 C50.1203933,7299.04772 49.0738052,7297.68074 48.197098,7296.46676 C46.4032359,7293.98379 45.0330649,7289.44985 46.8734421,7286.3899 C47.7875635,7284.87092 49.4206455,7283.90793 51.1942837,7283.88393 C52.5422083,7283.85893 53.8153044,7284.75292 54.6394294,7284.75292 C55.4635543,7284.75292 57.0106846,7283.67793 58.6366882,7283.83593 C59.3172232,7283.86293 61.2283842,7284.09893 62.4549652,7285.8199 C62.355868,7285.8789 60.1747177,7287.09489 60.1989864,7289.62485"
-                            id="apple-[#173]">
-
-                        </path>
+                        <path d="M57.5708873,7282.19296 C58.2999598,7281.34797 58.7914012,7280.17098 58.6569121,7279 C57.6062792,7279.04 56.3352055,7279.67099 55.5818643,7280.51498 C54.905374,7281.26397 54.3148354,7282.46095 54.4735932,7283.60894 C55.6455696,7283.69593 56.8418148,7283.03894 57.5708873,7282.19296 M60.1989864,7289.62485 C60.2283111,7292.65181 62.9696641,7293.65879 63,7293.67179 C62.9777537,7293.74279 62.562152,7295.10677 61.5560117,7296.51675 C60.6853718,7297.73474 59.7823735,7298.94772 58.3596204,7298.97372 C56.9621472,7298.99872 56.5121648,7298.17973 54.9134635,7298.17973 C53.3157735,7298.17973 52.8162425,7298.94772 51.4935978,7298.99872 C50.1203933,7299.04772 49.0738052,7297.68074 48.197098,7296.46676 C46.4032359,7293.98379 45.0330649,7289.44985 46.8734421,7286.3899 C47.7875635,7284.87092 49.4206455,7283.90793 51.1942837,7283.88393 C52.5422083,7283.85893 53.8153044,7284.75292 54.6394294,7284.75292 C55.4635543,7284.75292 57.0106846,7283.67793 58.6366882,7283.83593 C59.3172232,7283.86293 61.2283842,7284.09893 62.4549652,7285.8199 C62.355868,7285.8789 60.1747177,7287.09489 60.1989864,7289.62485" id="apple-[#173]" />
                     </g>
                 </g>
             </g>
         </svg>
-    )
+    );
 }
 
-function Tooltip({message, children}: { message: string, children: React.ReactNode }) {
+function Tooltip({ message, children }: { message: string; children: React.ReactNode }) {
     return (
         <div className="group relative flex">
             {children}
-            <span
-                className="absolute top-12 left-24 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">{message}</span>
+            <span className="absolute top-12 left-24 -translate-x-50 transform-gpu scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
+                {message}
+            </span>
         </div>
-    )
+    );
 }
