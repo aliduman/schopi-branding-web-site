@@ -15,7 +15,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({subsets: ["latin"]});
 
-export async function generateMetadata({params}: { params: { lang: string } }): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
     return {
         title: metadata.metaTitle,
         description: metadata.metaDescription,
@@ -25,21 +25,22 @@ export async function generateMetadata({params}: { params: { lang: string } }): 
 
 export default async function RootLayout({children, params,}: {
     readonly children: React.ReactNode;
-    readonly params: { lang: string };
+    readonly params: Promise<{ lang: string }>;
 }) {
-    const dict = await getDictionary(params.lang);
+    const { lang } = await params;
+    const dict = await getDictionary(lang);
 
     let metaTitle = metadata.metaTitle;
     let metaDescription = metadata.metaDescription;
 
     // En dictionary is used for metadata
-    if (params.lang === "en") {
+    if (lang === "en") {
         metaTitle = metaDataEn.metaTitle;
         metaDescription = metaDataEn.metaDescription;
     }
 
     return (
-        <html lang={params.lang} suppressHydrationWarning>
+        <html lang={lang} suppressHydrationWarning>
         <head>
             <meta charSet="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -66,14 +67,14 @@ export default async function RootLayout({children, params,}: {
         </head>
         <body className={inter.className}>
         <ThemeProvider attribute="class">
-            <Navbar dict={dict} lang={params.lang}></Navbar>
+            <Navbar dict={dict} lang={lang}></Navbar>
 
             <main>
                 {children}
                 <SpeedInsights/>
             </main>
 
-            <Footer dict={dict} lang={params.lang}/>
+            <Footer dict={dict} lang={lang}/>
             {/*<PopupWidget/>*/}
         </ThemeProvider>
         </body>

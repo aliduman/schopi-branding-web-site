@@ -1,16 +1,17 @@
 import Container from "../components/Container";
 
 type Props = {
-    params: {
+    params: Promise<{
         lang: string,
         slug: string
-    }
+    }>
 }
 
 export default async function PageRoute({params}: Props) {
+    const { lang } = await params;
     return (
         <Container style={{'paddingTop':175}}>
-            {params.lang === 'tr' ? <TermsTR /> : <TermsEN />}
+            {lang === 'tr' ? <TermsTR /> : <TermsEN />}
         </Container>
     )
 }

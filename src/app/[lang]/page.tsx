@@ -9,8 +9,9 @@ import CtaRevamp from "./components/CtaRevamp";
 import VideoRevamp from "./components/VideoRevamp";
 import { getUnsplashAvatarUrlsByGender } from "@/lib/unsplash";
 
-export default async function RootRoute({ params }: { params: { lang: string } }) {
-    const dict = await getDictionary(params.lang);
+export default async function RootRoute({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
+    const dict = await getDictionary(lang);
     const avatarGenders: Array<"female" | "male"> = [
         "female", // Ayse
         "male",   // Mehmet

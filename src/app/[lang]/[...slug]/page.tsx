@@ -2,10 +2,10 @@ import Container from "./../components/Container";
 import Image from 'next/image';
 
 type Props = {
-    params: {
+    params: Promise<{
         lang: string,
         slug: string
-    }
+    }>
 }
 
 export default async function PageRoute({params}: Props) {
