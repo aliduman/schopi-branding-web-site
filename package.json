@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "node scripts/install-opennext-cli.mjs",
+    "deploy": "opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.10",
