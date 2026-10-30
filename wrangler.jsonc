@@ -3,7 +3,7 @@
   "main": ".open-next/worker.js",
   "name": "schopi-branding-web-site",
   "build": {
-    "command": "bunx opennextjs-cloudflare build"
+    "command": "npx opennextjs-cloudflare build"
   },
   "compatibility_date": "2026-10-31",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
